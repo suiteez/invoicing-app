@@ -83,7 +83,7 @@
                             <a href="<c:url value="/customers" />"><spring:message code="label.pages.customers"></spring:message></a>
                         </li>
                         <li>
-                            <a href="<c:url value="/invoices" />"><spring:message code="label.customer.invoice"></spring:message></a>
+                            <a href="<c:url value="/invoices/add" />"><spring:message code="label.customer.invoice"></spring:message></a>
                         </li>
                     </ul>
                 </div>

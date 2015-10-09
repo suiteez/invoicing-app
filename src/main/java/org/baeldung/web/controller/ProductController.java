@@ -4,6 +4,7 @@ import org.baeldung.persistence.model.Product;
 import org.baeldung.persistence.service.IProductService;
 import org.baeldung.persistence.service.IUserService;
 import org.baeldung.persistence.service.ProductDto;
+import org.baeldung.web.util.GenericResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,30 +18,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ProductController {
-    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
+    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
     @Autowired
     private IUserService userService;
-    
     @Autowired
     private IProductService productService;
-    
     @Autowired
     private MessageSource messages;
-
     @Autowired
     private JavaMailSender mailSender;
-
     @Autowired
     private ApplicationEventPublisher eventPublisher;
-
     @Autowired
     private UserDetailsService userDetailsService;
-
     @Autowired
     private Environment env;
 
@@ -48,44 +45,51 @@ public class ProductController {
         super();
     }
 
-   
-  /*  @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public String listExisitingproducts(Model model) {
-        LOGGER.debug("Get all the products");
+    /*  @RequestMapping(value = "/products", method = RequestMethod.GET)
+     public String listExisitingproducts(Model model) {
+     LOGGER.debug("Get all the products");
         
-        model.addAttribute("productForm", new Product());
-        model.addAttribute("incomeAccount", productService.listProductNames());
+     model.addAttribute("productForm", new Product());
+     model.addAttribute("incomeAccount", productService.listProductNames());
 
-        return "product";
-    }
-    */
-    
+     return "product";
+     }
+     */
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public ModelAndView showProductForm(Model model) {
-    	
-    	//model.addAttribute("incomeAccount", productService.listProductNames());
+
+        //model.addAttribute("incomeAccount", productService.listProductNames());
         return new ModelAndView("product", "productForm", new Product());
     }
-    
 
     @RequestMapping(value = "/product/add", method = RequestMethod.POST)
-    public String addProduct(final ProductDto productDto, Model model){
-        LOGGER.debug("Registering user account with information: {}", productDto);
+    public String addProduct(final ProductDto productDto, Model model) {
+        LOGGER.debug("Adding product with information: {}", productDto);
 
-          productService.createNewProduct(productDto);
-          model.addAttribute("productForm", new Product());
-          
+        productService.createNewProduct(productDto);
+        model.addAttribute("productForm", new Product());
+
         return "redirect:/products";
     }
-    
+
+    @RequestMapping(value = "/product/addajax", method = RequestMethod.POST)
+    @ResponseBody
+    public GenericResponse addProductAjax(@RequestParam("productName") String productName) {
+        LOGGER.debug("Adding product with information: {}", productName);
+        ProductDto productDto = new ProductDto();
+        productDto.setProductName(productName);
+        productService.createNewProduct(productDto);
+
+        return new GenericResponse("success");
+    }
+
     @RequestMapping("/remove/product/{id}")
-    public String removePerson(@PathVariable("id") int id){
-		
-    	Product product = productService.findProduct(id);
-    	
-    	productService.deleteProduct(product);
-   
+    public String removePerson(@PathVariable("id") int id) {
+
+        Product product = productService.findProduct(id);
+
+        productService.deleteProduct(product);
+
         return "redirect:/products";
     }
-  
 }

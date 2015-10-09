@@ -22,47 +22,65 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class CustomerService implements ICustomerService {
 
-	@Autowired
-	private CustomerRespository repository;
+    @Autowired
+    private CustomerRespository repository;
+    private SessionFactory sessionFactory;
 
-	private SessionFactory sessionFactory;
+    @Override
+    public Customer registerNewCustomerAccount(CustomerDto customerDto)
+            throws EmailExistsException {
+        final Customer customer = new Customer();
 
-	@Override
-	public Customer registerNewCustomerAccount(CustomerDto customerDto)
-			throws EmailExistsException {
-		final Customer customer = new Customer();
+        customer.setFirstName(customerDto.getFirstName());
+        customer.setLastName(customerDto.getLastName());
+        customer.setName(customerDto.getName());
+        customer.setState(customerDto.getState());
+        customer.setCountry(customerDto.getCountry());
+        customer.setCity(customerDto.getCity());
+        customer.setStreetAddress(customerDto.getStreetAddress());
+        customer.setZip(customerDto.getZip());
 
-		customer.setFirstName(customerDto.getFirstName());
-		customer.setLastName(customerDto.getLastName());
+        return repository.save(customer);
+    }
 
-		return repository.save(customer);
-	}
+    @Override
+    public List<Customer> listCustomers() {
+        final List<Customer> customers = repository.findAll();
+        return customers;
+    }
 
-	@Override
-	public List<Customer> listCustomers() {
-		final List<Customer> customers = repository.findAll();
-		return customers;
-	}
+    @Override
+    public void deleteCustomer(Customer customer) {
 
-	@Override
-	public void deleteCustomer(Customer customer) {
-		
-		repository.delete(customer);
+        repository.delete(customer);
 
-	}
+    }
 
-	@Override
-	public Customer findCustomer(int customerID) {
+    @Override
+    public Customer findCustomer(int customerID) {
 
-		final List<Customer> customers = repository.findAll();
+        final List<Customer> customers = repository.findAll();
 
-		for (Customer customer : customers) {
-			if (customer.getId() == customerID) {
-				return customer;
-			}
+        for (Customer customer : customers) {
+            if (customer.getId() == customerID) {
+                return customer;
+            }
 
-		}
-		return null;
-	}
+        }
+        return null;
+    }
 
+    @Override
+    public Customer findCustomerByName(String name) {
+        final List<Customer> customers = repository.findAll();
+
+        for (Customer customer : customers) {
+            if (customer.getName() != null && name != null
+                    && customer.getName().equals(name)) {
+                return customer;
+            }
+
+        }
+        return null;
+    }
 }

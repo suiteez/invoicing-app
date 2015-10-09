@@ -16,5 +16,6 @@ public interface ICustomerService {
 
 
 	Customer findCustomer(int id);
+	Customer findCustomerByName(String name);
    
 }
