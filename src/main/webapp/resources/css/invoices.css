@@ -1,0 +1,36 @@
+/* 
+    Document   : invoices
+    Created on : 3 Oct, 2015, 6:13:41 PM
+    Author     : Aamir Mansuri
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+.row-fluid {
+    width: 100%;
+}
+.table-header div {
+    font-size: 18px;
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: bold;
+    color: #999999;
+}
+.table-row {
+    float:left;
+}
+.product-table {
+    background-color: whitesmoke;
+     margin-top: 15px;
+}
+.modal-content {
+    position: relative;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+#customerform div span {
+    margin-bottom: 5px;
+}

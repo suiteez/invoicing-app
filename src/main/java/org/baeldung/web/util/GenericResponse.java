@@ -11,10 +11,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class GenericResponse {
     private String message;
     private String error;
-
+    private Object customobj;
+    
     public GenericResponse(final String message) {
         super();
         this.message = message;
+    }
+
+    public GenericResponse(final String message,Object customobj) {
+        super();
+        this.message = message;
+        this.customobj=customobj;
     }
 
     public GenericResponse(final String message, final String error) {
@@ -51,4 +58,13 @@ public class GenericResponse {
         this.error = error;
     }
 
+    public Object getCustomobj() {
+        return customobj;
+    }
+
+    public void setCustomobj(Object customobj) {
+        this.customobj = customobj;
+    }
+
+    
 }

@@ -11,20 +11,34 @@ import org.baeldung.validation.ValidEmail;
 import org.baeldung.validation.ValidPassword;
 
 public class CustomerDto {
+
     @NotNull
     @Size(min = 1)
     private String firstName;
-
     @NotNull
     @Size(min = 1)
     private String lastName;
-
-    @ValidEmail
     @NotNull
     @Size(min = 1)
+    private String name;
+    @ValidEmail
+//    @NotNull
+//    @Size(min = 1)
     private String email;
-    
+    private String streetAddress;
+    private String city;
+    private String zip;
+    private String country;
+    private String state;
     private List<Customer> listCustomers;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getEmail() {
         return email;
@@ -49,24 +63,62 @@ public class CustomerDto {
     public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
-    
-	public List<Customer> getListCustomers() {
-		return listCustomers;
-	}
 
-	public void setListCustomers(List<Customer> listCustomers) {
-		Customer  newCustomer = new Customer();
-		newCustomer.setFirstName("firstName");
-		newCustomer.setLastName("lastName"); 
-		listCustomers.add(newCustomer);
-		this.listCustomers = listCustomers;
-	}
+    public String getStreetAddress() {
+        return streetAddress;
+    }
 
-	@Override
-	public String toString() {
-		return "CustomerDto [firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email +"]";
-	}
-    
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public List<Customer> getListCustomers() {
+        return listCustomers;
+    }
+
+    public void setListCustomers(List<Customer> listCustomers) {
+        Customer newCustomer = new Customer();
+        newCustomer.setFirstName("firstName");
+        newCustomer.setLastName("lastName");
+        listCustomers.add(newCustomer);
+        this.listCustomers = listCustomers;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomerDto [firstName=" + firstName + ", lastName=" + lastName
+                + ", email=" + email + "]";
+    }
 }
- 

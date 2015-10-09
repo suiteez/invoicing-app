@@ -60,6 +60,20 @@ public class ProductService implements IProductService {
 		}
 		return null;
 	}
+        
+        @Override
+	public Product findProductByName(String name) {
+		final List<Product> products = repository.findAll();
+
+		for (Product product : products) {
+			if (product.getProductName()!=null && name !=null &&
+                                product.getProductName().equals(name)) {
+				return product;
+			}
+
+		}
+		return null;
+	}
 
 	@Override
 	public List<Product> listProducts() {

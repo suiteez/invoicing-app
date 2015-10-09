@@ -6,6 +6,7 @@ import org.baeldung.persistence.model.Customer;
 import org.baeldung.persistence.service.CustomerDto;
 import org.baeldung.persistence.service.ICustomerService;
 import org.baeldung.validation.EmailExistsException;
+import org.baeldung.web.util.GenericResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class CustomerController {
@@ -58,6 +60,19 @@ public class CustomerController {
 //        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
 
         return "redirect:/customers";
+    }
+    
+    
+    @RequestMapping(value = "/customer/addajax", method = RequestMethod.POST)
+    @ResponseBody
+    public GenericResponse addajaxCustomer(@Valid final CustomerDto customerDto) throws EmailExistsException {
+        LOGGER.debug("Adding Customer with information: {}", customerDto);
+
+          Customer customer = customerSerivce.registerNewCustomerAccount(customerDto);
+//        final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+//        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
+
+        return new GenericResponse("success",customer);
     }
     
     @RequestMapping("/remove/{id}")

@@ -4,8 +4,16 @@
 <%@ page session="false"%>
 <html lang="en">
     <head>
+        <link href="<c:url value="/resources/css/invoices.css" />" rel="stylesheet"/>
+        <!-- jQuery -->
+        <script src="<c:url value='/resources/bower_components/jquery/dist/jquery.min.js' />" ></script>
+
+        <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
+        <link rel="stylesheet" href="<c:url value='/resources/bower_components/jquery-ui-1.11.4.custom/jquery-ui.css' />"/>
+
         <!-- Bootstrap Core CSS -->
         <link href="<c:url value="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />" rel="stylesheet"/>
+
 
         <!-- MetisMenu CSS -->
         <link href="<c:url value="/resources/bower_components/metisMenu/dist/metisMenu.min.css" />" rel="stylesheet"/>
@@ -21,82 +29,43 @@
 
         <!-- Custom Fonts -->
         <link href="<c:url value="/resources/bower_components/font-awesome/css/font-awesome.min.css" />" rel="stylesheet" type="text/css"/>
+        
+        <!--boootstrap datpicker css-->
+        <link href="<c:url value="/resources/css/bootstrap-datepicker.css" />" rel="stylesheet"/>
 
         <title><spring:message code="label.pages.home.title"></spring:message></title>
 
         <spring:url value="/resources/hello.css" var="coreCss" />
         <link href="${coreCss}" rel="stylesheet" />
 
-        <!-- jQuery -->
-        <script src="<c:url value='/resources/bower_components/jquery/dist/jquery.min.js' />" ></script>
-
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <script src="<c:url value='/resources/js/jautocomple.js' />"></script>
-
-        <%-- <spring:url value="/resources/bootstrap.min.css" var="bootstrapCss" /> --%>
-        <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">-->
-        <!--<link href="${bootstrapCss}" rel="stylesheet" />-->
-        <style type="text/css">
-            .tg {
-                border-collapse: collapse;
-                border-spacing: 0;
-                border-color: #ccc;
-            }
-
-            .tg td {
-                font-family: Arial, sans-serif;
-                font-size: 14px;
-                padding: 10px 5px;
-                border-style: solid;
-                border-width: 1px;
-                overflow: hidden;
-                word-break: normal;
-                border-color: #ccc;
-                color: #333;
-                background-color: #fff;
-            }
-
-            .tg th {
-                font-family: Arial, sans-serif;
-                font-size: 14px;
-                font-weight: normal;
-                padding: 10px 5px;
-                border-style: solid;
-                border-width: 1px;
-                overflow: hidden;
-                word-break: normal;
-                border-color: #ccc;
-                color: #333;
-                background-color: #f0f0f0;
-            }
-
-            .tg .tg-4eph {
-                background-color: #f9f9f9
-            }
-        </style>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="<c:url value='/resources/bower_components/bootstrap/dist/js/bootstrap.min.js' />" ></script>
+        <script src="<c:url value='/resources/bower_components/jquery-ui-1.11.4.custom/jquery-ui.js' />"></script>
+        <script src="<c:url value='/resources/js/accounting.min.js' />" ></script>
+        <!--<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
         <style>
-            .product_Name-combobox {
-                position: relative;
-                display: inline-block;
-            }
-            .product_Name-combobox-toggle {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                margin-left: -1px;
-                padding: 0;
-            }
-            .product_Name-combobox-input {
-                margin: 0;
-                padding: 5px 10px;
-            }
-        </style>
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> 
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-         <script src="https://getbootstrap.com/2.3.2/assets/js/bootstrap-modal.js"></script> -->
+            
+.custom-combobox {
+    position: relative;
+    display: inline-block;
+}
+.custom-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+}
+.custom-combobox-input {
+    margin: 0;
+    padding: 5px 10px;
 
+}
+.ui-autocomplete {
+    z-index: 10000;
+}
+        </style>
+        
     </head>
 
     <body>
@@ -113,146 +82,162 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="home.html"><spring:message code="label.pages.home.title"></spring:message></a>
-                </div>
-                <!-- /.navbar-header -->
+                    </div>
+                    <!-- /.navbar-header -->
 
-                <ul class="nav navbar-top-links navbar-right">
-                    <!-- /.dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="<c:url value="/changePassword.html" />"><spring:message code="message.changePassword"></spring:message></a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="<c:url value="/j_spring_security_logout" />"><spring:message code="label.pages.logout"></spring:message></a>
-                                <!--<a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>-->
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-user -->
-                    </li>
-                    <!-- /.dropdown -->
+                    <ul class="nav navbar-top-links navbar-right">
+                        <!-- /.dropdown -->
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="<c:url value="/changePassword.html" />"><spring:message code="message.changePassword"></spring:message></a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="<c:url value="/j_spring_security_logout" />"><spring:message code="label.pages.logout"></spring:message></a>
+                                    <!--<a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>-->
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-user -->
+                        </li>
+                        <!-- /.dropdown -->
 
-                </ul>
+                    </ul>
 
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">
-                            <li>
-                                <a href="<c:url value="/console.html" />">
+                    <div class="navbar-default sidebar" role="navigation">
+                        <div class="sidebar-nav navbar-collapse">
+                            <ul class="nav" id="side-menu">
+                                <li>
+                                    <a href="<c:url value="/console.html" />">
                                     <i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                                 <!--<a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>-->
                             </li>
                             <li>
                                 <a href="<c:url value="/customers" />"><spring:message code="label.pages.customers"></spring:message></a>
-                            </li>
-                            <li>
-                                <a href="<c:url value="/invoices" />"><spring:message code="label.customer.invoice"></spring:message></a>
-                            </li>
-                        </ul>
+                                </li>
+                                <li>
+                                    <a href="<c:url value="/invoices" />"><spring:message code="label.customer.invoice"></spring:message></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.sidebar-collapse -->
                     </div>
-                    <!-- /.sidebar-collapse -->
-                </div>
-                <!-- /.navbar-static-side -->
-            </nav>
-            <div id="page-wrapper">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Invoices</h1>
+                    <!-- /.navbar-static-side -->
+                </nav>
+                <div id="page-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">Invoices</h1>
+                        </div>
+                        <!-- /.col-lg-12 -->
                     </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <div class="row">
-                    <!--	<nav class="navbar navbar-inverse navbar-fixed-top">
-                                    <div class="container">
-                                            <div class="navbar-header">
-                                                    <a class="navbar-brand" href="/SpringMVCHibernate">BILLING
-                                                            Application Inc</a>
-                                            </div>
+                    <div class="row">
+                        <!--	<nav class="navbar navbar-inverse navbar-fixed-top">
+                                        <div class="container">
+                                                <div class="navbar-header">
+                                                        <a class="navbar-brand" href="/SpringMVCHibernate">BILLING
+                                                                Application Inc</a>
+                                                </div>
+                                        </div>
+                                </nav>-->
+
+                        <!--<div class="jumbotron"></div>-->
+
+                        <div class="container">
+                            <h3>Add an Invoice</h3>
+                            <c:if test="${param.message != null}">
+                            <div class="alert alert-info">
+                            ${param.message}
+                            </div>
+                            </c:if>
+                            <span class="alert alert-danger col-sm-11" id="globalError" style="display:none"></span>
+                            <form action="/" method="POST" class="" enctype="utf8" id="addInvoiceForm" >
+                                <div class="form-group control-group ">
+                                    <label class="col-sm-2"><spring:message code="label.invoice.invoicedate"></spring:message></label>
+                                    <span class="col-sm-2"><input class="form-control datepicker" type="text" id="invoicedate" name="invoicedate" value="" required/></span>
+                                    <span id="invoicedateError" class="alert alert-danger col-sm-2" style="display:none"></span>
+                                </div>
+                                <div class="form-group control-group ">
+                                    <label class="col-sm-1"><spring:message code="label.invoice.duedate"></spring:message></label>
+                                    <span class="col-sm-2"><input class="form-control datepicker" type="text" id="duedate" name="duedate" value="" required/></span>
+                                    <span id="duedateError" class="alert alert-danger col-sm-2" style="display:none"></span>
+                                </div>
+                                <div class="form-group control-group col-lg-12"></div>
+                                <div class="form-group control-group ">
+                                    <label class="col-sm-2"><spring:message code="label.invoice.customer"></spring:message></label>
+                                    <span class="col-sm-3">
+                                        <select id="customer"  name="customer" class="form-control combobox autocomplete" >
+                                            <c:forEach items="${customerList}" var="cust" varStatus="loop">
+                                                <option value="${cust.name}">${cust.name}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </span>
+                                    <span id="customerError" class="alert alert-danger col-sm-2" style="display:none"></span>
+                                </div>
+                                
+                                <div class="form-group control-group col-sm-12 product-table">
+                                    <span id="invdetailListError" class="alert alert-danger col-sm-2" style="display:none"></span>
+                                    <div class="table-header">
+                                        <div class="col-sm-3"><spring:message code="label.invoice.product"></spring:message></div>
+                                        <div class="col-sm-3"><spring:message code="label.invoice.description"></spring:message></div>
+                                        <div class="col-sm-1"><spring:message code="label.invoice.quantity"></spring:message></div>
+                                        <div class="col-sm-1"><spring:message code="label.invoice.price"></spring:message></div>
+                                        <div class="col-sm-1"><spring:message code="label.invoice.tax"></spring:message></div>
+                                        <div class="col-sm-1" style="width:11%"><spring:message code="label.invoice.amount"></spring:message></div>
+                                        <div class="col-sm-1" style="width:4%"></div>
                                     </div>
-                            </nav>-->
+                                    <div class="table-row row0" data-id="0">
+                                        <div class="col-sm-3">
+                                            <p><select id="product_Name"  name="invdetailList[0].product" class="form-control autocomplete" >
+                                                    <c:forEach items="${productName}" var="prod" varStatus="loop">
+                                                        <option value="${prod}">${prod}</option>
+                                                    </c:forEach>
+                                                </select></p>
+                                        </div>
+                                        <div class="col-sm-3"><input class="form-control description0" name="invdetailList[0].description" id="description" value="" required />
+                                        </div>
+                                        <div class="col-sm-1"><input class="form-control quantity0" name="invdetailList[0].quantity" id="quantity" value="" required /></div>
+                                        <div class="col-sm-1"><input class="form-control price0" name="invdetailList[0].price" id="price" value="" required /></div>
+                                        <div class="col-sm-1"><input class="form-control tax0" name="invdetailList[0].tax" id="tax" value="" required /></div>
+                                        <div class="col-sm-1" style="width:11%"><input class="form-control amount0" readonly name="invdetailList[0].amount" id="amount" value="" required />
+                                            <span></span>
+                                        </div>
+                                        <div class="col-sm-1" style="width:4%"><a href="javascript:void(0)" class="remove-item pull-right " style="display: none;font-size: 20;" onclick="removeRow('0')">×</a></div>
+                                    </div>
+                                </div>
+                                    
+                                <div class="form-group control-group col-sm-12">
+                                    <a href="#" title="add-new-invoice" class="add-new-invoice">+ Add new Product</a> 
+                                </div>
+                                <div class="form-group control-group ">
+                                    <label class="col-sm-1"><spring:message code="label.invoice.totalprice"></spring:message></label>
+                                <span class="col-sm-2"><input class="form-control datepicker" type="text" id="subtotal" name="subtotal" value="" required readonly=""/></span>
+                                    <span id="subtotalError" class="alert alert-danger col-sm-2" style="display:none"></span>
+                                </div>
+                                <div class="form-group control-group ">
+                                    <label class="col-sm-1"><spring:message code="label.invoice.totaltax"></spring:message></label>
+                                    <span class="col-sm-2"><input class="form-control " type="text" id="totaltax" name="tax" value="" readonly=""/></span>
+                                    <span id="taxError" class="alert alert-danger col-sm-2" style="display:none"></span>
+                                </div>
+                                <div class="form-group control-group ">
+                                    <label class="col-sm-1"><spring:message code="label.invoice.totalamount"></spring:message></label>
+                                    <span class="col-sm-2"><input class="form-control datepicker" type="text" id="totalamount" name="total" value="" readonly=""/></span>
+                                    <span id="amountError" class="alert alert-danger col-sm-2" style="display:none"></span>
+                                </div>
+                                    
+                                <div class="form-group control-group col-sm-12">
+                                    <br><button type="submit" class="btn btn-primary">
+                                    <spring:message code="label.invoice.form.submit"></spring:message>
+                                    </button>
 
-                    <div class="jumbotron"></div>
-
-                    <div class="container">
-                        <h3>Add an Invoice</h3>
-
-                        <form action="/" method="POST" enctype="utf8" id="addInvoiceForm">
-                            <table class="table table-striped">
-                                <thead class="table table-striped">
-                                    <tr>
-                                        <th width="80">Product</th>
-                                        <th width="120">Description</th>
-                                        <th width="120">Quantity</th>
-                                        <th width="60">Price</th>
-                                        <th width="60">Tax</th>
-                                        <th width="60">Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <!-- <div class="dropdown">
-                                                    <button class="btn btn-primary dropdown-toggle" type="button"data-toggle="dropdown">
-                                                            <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                            <li><a href="#">HTML</a></li>
-                                                            <li><a href="#">CSS</a></li>
-                                                            <li><a href="#">JavaScript</a></li>
-                                                    </ul>
-                                            </div> -->
-                                            <form:select id="product_Name"  path="productName">
-                                                <form:option value="NONE" label="Select Product"/>
-                                                <form:options items="${productList}"/> 
-                                                <form:option value="products">Add New Product</form:option>
-                                            </form:select>
-                                        </td>
-
-                                        <td>
-                                            <div>
-                                                <span class="col-sm-8"><input class="form-control" name="description" value="" required /></span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <span class="col-sm-5"><input class="form-control" name="quantity" value="" required /></span>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div>
-                                                <span class="col-sm-7"><input class="form-control" name="price" value="" required /></span>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div>
-                                                <span class="col-sm-7"><input class="form-control" name="tax" value="" required /></span>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div>
-                                                <span class="col-sm-7"><input class="form-control" name="amount" value="" required /></span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <a href="#" title="add-new-invoice" class="add-new-invoice">+ Add a line</a> 
-
-                            <br>
-                            <button type="submit" class="btn btn-primary">
-                                <spring:message code="label.invoice.form.submit"></spring:message>
-                            </button>
+                                </div>
                         </form>
                         <br>
 
@@ -262,22 +247,75 @@
 
 
                         <!-- Modal -->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <div class="modal fade" id="customermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <span class="alert alert-danger col-sm-8" id="modalError" style="display:none"></span>
+                            <form id="customerform" class="customerform" method="post" role="form">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group control-group col-sm-13">
+                                                <label class="col-sm-3"><spring:message code="label.customer.name"></spring:message></label>
+                                                <span class="col-sm-8"><input class="form-control " type="text" id="name" name="name" value="" /></span>
+                                                <span id="nameError" class="alert alert-danger col-sm-3" style="display:none"></span>
+                                            </div>
+                                            <div class="col-sm-13">
+                                                <div class="form-group control-group ">
+                                                    <label class="col-sm-3"><spring:message code="label.customer.fname"></spring:message></label>
+                                                    <span class="col-sm-3"><input class="form-control " type="text" id="firstName" name="firstName" value="" /></span>
+                                                    <span id="firstNameError" class="alert alert-danger col-sm-3" style="display:none"></span>
+                                                </div>
+                                                <div class="form-group control-group ">
+                                                    <label class="col-sm-3"><spring:message code="label.customer.lname"></spring:message></label>
+                                                    <span class="col-sm-3"><input class="form-control " type="text" id="lastName" name="lastName" value="" /></span>
+                                                    <span id="lastNameError" class="alert alert-danger col-sm-3" style="display:none"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group control-group col-sm-13">
+                                                <label class="col-sm-3"><spring:message code="label.customer.email"></spring:message></label>
+                                                <span class="col-sm-8"><input class="form-control " type="text" id="email" name="email" value="" /></span>
+                                                <span id="emailError" class="alert alert-danger col-sm-3" style="display:none"></span>
+                                            </div>
+                                            <div class="form-group control-group col-sm-13">
+                                                <label class="col-sm-3"><spring:message code="label.customer.streetAddress"></spring:message></label>
+                                                <span class="col-sm-8"><input class="form-control " type="text" id="streetAddress" name="streetAddress" value="" /></span>
+                                                <span id="streetAddressError" class="alert alert-danger col-sm-3" style="display:none"></span>
+                                            </div>
+                                            <div class="col-sm-13">
+                                                <div class="form-group control-group ">
+                                                    <label class="col-sm-3"><spring:message code="label.customer.city"></spring:message></label>
+                                                    <span class="col-sm-3"><input class="form-control " type="text" id="city" name="city" value="" /></span>
+                                                    <span id="cityError" class="alert alert-danger col-sm-3" style="display:none"></span>
+                                                </div>
+                                                <div class="form-group control-group ">
+                                                    <label class="col-sm-3"><spring:message code="label.customer.zip"></spring:message></label>
+                                                    <span class="col-sm-3"><input class="form-control " type="text" id="zip" name="zip" value="" /></span>
+                                                    <span id="zipError" class="alert alert-danger col-sm-3" style="display:none"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-13">
+                                                <div class="form-group control-group ">
+                                                    <label class="col-sm-3"><spring:message code="label.customer.country"></spring:message></label>
+                                                    <span class="col-sm-3"><input class="form-control " type="text" id="country" name="country" value="" /></span>
+                                                    <span id="countryError" class="alert alert-danger col-sm-3" style="display:none"></span>
+                                                </div>
+                                                <div class="form-group control-group ">
+                                                    <label class="col-sm-3"><spring:message code="label.customer.state"></spring:message></label>
+                                                    <span class="col-sm-3"><input class="form-control " type="text" id="state" name="state" value="" /></span>
+                                                    <span id="stateError" class="alert alert-danger col-sm-3" style="display:none"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer col-sm-9">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="submit" id="customersavebtn" class="btn btn-primary">Save changes</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
                     </div>
@@ -295,24 +333,65 @@
         <script type="text/javascript">
 	
             /* Add New Line */
-            var counter = 1;
-            jQuery('add-new-invoice')
-            .click(
-            function(event) {
-                event.preventDefault();
-                counter++;
-                var newRow = jQuery('<tr><td><div class="dropdown"><button class="btn btn-primary dropdown-toggle" type="button"data-toggle="dropdown"><span class="caret"></span></button><ul class="dropdown-menu"><li><a href="#">HTML</a></li><li><a href="#">CSS</a></li><li><a href="#">JavaScript</a></li></ul></div>'
-                    + counter +'</td><td><div><span class="col-sm-8"><input class="form-control" name="lastName" value="" required /></span></div>'
-                    + counter +'</td></tr>');
-                jQuery('table.table table-striped').append(newRow);
-            });
+            var counter = 0;
+            
 		
             /* Submit Invoice */	
 
             $(document).ready(function () {
-                $('form').submit(function(event) {
+                $('#addInvoiceForm').submit(function(event) {
                     saveInvoice(event);
                 });
+                
+                $('#customerform').submit(function(event){
+                    saveCustomer(event);
+                });
+                //button click event
+                jQuery('.add-new-invoice')
+                .click(
+                function(event) {
+                    event.preventDefault();
+                    counter++;
+                    var $tr    = $('.table-row:first');
+                    var $clone = $tr.clone();
+                    
+                    $(".row"+(counter-1)).find("a.remove-item").show();
+                    
+                    rowid=$clone.attr('data-id');
+                    //init the text fields...
+                    $clone.find(':text').val('');
+                    $clone.find('select').prop('selectedIndex',-1);
+                    //remove the autocomplete of first row...
+                    $clone.find('.custom-combobox').remove();
+                    //set the id of the select field...
+                    $clone.find('select').attr('id','product_Name'+counter);
+                    $clone.find('input[id="description"]').removeClass('description'+rowid).addClass('description'+counter);
+                    $clone.find('input[id="quantity"]').removeClass('quantity'+rowid).addClass('quantity'+counter);
+                    $clone.find('input[id="price"]').removeClass('price'+rowid).addClass('price'+counter);
+                    $clone.find('input[id="tax"]').removeClass('tax'+rowid).addClass('tax'+counter);
+                    $clone.find('input[id="amount"]').removeClass('amount'+rowid).addClass('amount'+counter);
+                    $clone.removeClass('row'+rowid).addClass('row'+counter);
+                    $clone.attr('data-id',counter);
+
+                    //change the name of the new compnents...
+                    $clone.find('select').attr('name','invdetailList['+counter+'].product');
+                    $clone.find('input[id="description"]').attr('name','invdetailList['+counter+'].description');
+                    $clone.find('input[id="quantity"]').attr('name','invdetailList['+counter+'].quantity');
+                    $clone.find('input[id="price"]').attr('name','invdetailList['+counter+'].price');
+                    $clone.find('input[id="tax"]').attr('name','invdetailList['+counter+'].tax');
+                    $clone.find('input[id="amount"]').attr('name','invdetailList['+counter+'].amount');
+                    $clone.find("a.remove-item").attr("onclick","removeRow('"+counter+"')");
+                    $clone.find("a.remove-item").hide();
+                    
+                    //append the row to the table...
+                    $(".product-table").append($clone);
+                    
+                    //$clone.find('select').autocomplete( "destroy" );
+                    
+                    //create the auto completer for this row...
+                    initAutocomp($('#product_Name'+counter));
+                    initListners(counter);
+               });
             });
 
 
@@ -321,14 +400,43 @@
                 var formData= $('form').serialize();
                 $.post("<c:url value="/invoice/add"/>",formData ,function(data){
                     if(data.message == "success"){
-                        window.location.href = "<c:url value="/invoice.html"></c:url>";
+                        window.location.href = "<c:url value="/invoices/add"></c:url>"+ "?message=" + data.message;
                     }
-        
                 })
                 .fail(function(data) {
+//                    var errors = $.parseJSON(data.responseJSON.message);
+                    $("#globalError").show().append(data.responseJSON.error+"<br>");
+                    $.each( data.responseJSON.message, function( index,item ){
+                        $("#"+item.field+"Error").show().html(item.defaultMessage);
+                    });
+//                    errors = $.parseJSON(data.responseJSON.error);
+                    $.each( data.responseJSON.error, function( index,item ){
+                        $("#globalError").show().append(item.defaultMessage+"<br>");
+                    });
                 });
             }
 
+            function saveCustomer(event){
+                event.preventDefault();
+                var formData= $('#customerform').serialize();
+                $.post("<c:url value="/customer/addajax"/>",formData ,function(data){
+                    if(data.message == "success"){
+                        console.log("Customer added..."+data);
+                        if(data.message && data.message=="success"){
+                            $("#customer").append("<option selected >"+product+"</option>").val(data.customobj.name);
+                            $('#customermodal').modal('hide')
+                            console.log("Customer added.");
+                        }else{
+                            console.log("Customer not added."+data);
+                            $("#modalError").show().append(item.defaultMessage+"<br>");
+                        }
+                    }
+                })
+                .fail(function(data) {
+                    console.log("Customer not added..."+data);
+                    $("#modalError").show().append(data.responseJSON.error+"<br>");
+                });
+            }
             /* Add New Product */
             /* document.getElementById("product_Name").onchange = function(){
         if(this.selectedIndex == 1){
@@ -355,61 +463,18 @@
                 }
             };
 
-            //when DOM is ready
-            $(document).ready(function () {
-
-                // Attach Button click event listener 
-                $("#myBtn").click(function(){
-
-                    // show Modal
-                    /* $('#myModal').modal('show'); */
-                    $('#myModal').appendTo("body");
-                });
-                
-                //initialize the jquery auto completer.
-                $(function() {
-                    patchAutocomplete();
-                    $( "#product_Name" ).combobox();
-                    //                    $( "#toggle" ).click(function() {
-                    //                        $( "#combobox" ).toggle();
-                    //                    });
-                });
-                
-            });
-
-            function patchAutocomplete() {
-
-                // Don't really need to save the old fn, 
-                //          // but I could chain if I wanted to
-                //          var oldFn = $.ui.autocomplete.prototype._renderItem;
-                //
-                //          $.ui.autocomplete.prototype._renderItem = function( ul, item) {
-                //              var re = new RegExp("^" + this.term, "i") ;
-                //              var t = item.label.replace(re,"<span style='font-weight:bold;color:Blue;'>" + this.term + "</span>");
-                //              return $( "<li></li>" )
-                //                  .data( "item.autocomplete", item )
-                //                  .append( "<a>" + t + "</a>" )
-                //                  .appendTo( ul );
-                //          };
-          
-                $.ui.autocomplete.prototype._renderMenu = function( ul, items ) {
-                    var that = this;
-                    $.each( items, function( index, item ) {
-                        that._renderItemData( ul, item );
-                    });
-                    ul.append("<li><a href=# data-toggle='modal' data-target='#myModal'>Add Product</a></li>");
-                    $( ul ).find( "li:odd" ).addClass( "odd" );
-                };
-
+            function getContextPath() {
+               return "<c:out value="${pageContext.request.contextPath}" />";
             }
 
-        </script>
+            </script>
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="<c:url value='/resources/bower_components/bootstrap/dist/js/bootstrap.min.js' />" ></script>
 
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="<c:url value='/resources/bower_components/metisMenu/dist/metisMenu.min.js' />"></script>
+            <!-- invoice script  --> 
+            <script src="<c:url value='/resources/js/jautocomplete.js' />"></script>
+            <script src="<c:url value='/resources/js/invoice.js' />"></script>
+            <!-- Metis Menu Plugin JavaScript -->
+            <script src="<c:url value='/resources/bower_components/metisMenu/dist/metisMenu.min.js' />"></script>
 
         <!--     Morris Charts JavaScript 
             <script src="<c:url value='/resources/bower_components/raphael/raphael-min.js' />"></script>
@@ -418,6 +483,7 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="<c:url value='/resources/js/sb-admin-2.js' />"></script>
+        <script src="<c:url value='/resources/js/bootstrap-datepicker.js' />"></script>
 
 
     </body>	
