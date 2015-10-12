@@ -43,6 +43,15 @@ public class Invoice {
     @OneToMany(cascade= CascadeType.ALL)
     @JoinColumn(name="invoice_id")
     private List<Invoicedetail> invdetailList = new ArrayList<> ();
+
+    public Invoice() {
+    }
+
+    public Invoice(int id) {
+        this.id = id;
+    }
+    
+    
     public int getId() {
         return id;
     }

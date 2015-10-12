@@ -1,5 +1,6 @@
 package org.baeldung.persistence.model;
 
+import com.sun.istack.internal.Nullable;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,9 +26,10 @@ public class Invoicedetail implements Serializable {
 //    @NotNull
     private Integer id;
     @ManyToOne
-    @JoinColumn(name="invoice_id",
-            insertable=false, updatable=false, 
-                nullable=false)
+    @JoinColumn(name="invoice_id"
+            ,insertable=false, updatable=false, 
+                nullable=true
+            )
 //    @NotNull
     private Invoice invoice;
 //    @NotNull

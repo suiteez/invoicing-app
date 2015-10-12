@@ -161,19 +161,19 @@
                             <form action="/" method="POST" class="" enctype="utf8" id="addInvoiceForm" >
                                 <div class="form-group control-group ">
                                     <label class="col-sm-2"><spring:message code="label.invoice.invoicedate"></spring:message></label>
-                                    <span class="col-sm-2"><input class="form-control datepicker" type="text" id="invoicedate" name="invoicedate" value="" required/></span>
+                                    <span class="col-sm-2"><input class="form-control datepicker" type="text" id="invoicedate" name="invoicedate" placeholder="MM/dd/yyyy" value="" required/></span>
                                     <span id="invoicedateError" class="alert alert-danger col-sm-2" style="display:none"></span>
                                 </div>
                                 <div class="form-group control-group ">
                                     <label class="col-sm-1"><spring:message code="label.invoice.duedate"></spring:message></label>
-                                    <span class="col-sm-2"><input class="form-control datepicker" type="text" id="duedate" name="duedate" value="" required/></span>
+                                    <span class="col-sm-2"><input class="form-control datepicker" type="text" id="duedate" name="duedate" value="" placeholder="MM/dd/yyyy"  required/></span>
                                     <span id="duedateError" class="alert alert-danger col-sm-2" style="display:none"></span>
                                 </div>
                                 <div class="form-group control-group col-lg-12"></div>
                                 <div class="form-group control-group ">
                                     <label class="col-sm-2"><spring:message code="label.invoice.customer"></spring:message></label>
                                     <span class="col-sm-3">
-                                        <select id="customer"  name="customer" class="form-control combobox autocomplete" >
+                                        <select id="customer"  name="customer" class="form-control combobox autocomplete" placeholder="start typing a Customer Name" >
                                             <c:forEach items="${customerList}" var="cust" varStatus="loop">
                                                 <option value="${cust.name}">${cust.name}</option>
                                             </c:forEach>
@@ -195,21 +195,21 @@
                                     </div>
                                     <div class="table-row row0" data-id="0">
                                         <div class="col-sm-3">
-                                            <p><select id="product_Name"  name="invdetailList[0].product" class="form-control autocomplete" >
+                                            <p><select id="product_Name"  name="invdetailList[0].product" class="form-control autocomplete" placeholder="start typing a product name" >
                                                     <c:forEach items="${productName}" var="prod" varStatus="loop">
                                                         <option value="${prod}">${prod}</option>
                                                     </c:forEach>
                                                 </select></p>
                                         </div>
-                                        <div class="col-sm-3"><input class="form-control description0" name="invdetailList[0].description" id="description" value="" required />
+                                        <div class="col-sm-3"><input class="form-control description0" name="invdetailList[0].description" id="description" value="" required placeholder="Describe your product or service" />
                                         </div>
-                                        <div class="col-sm-1"><input class="form-control quantity0" name="invdetailList[0].quantity" id="quantity" value="" required /></div>
-                                        <div class="col-sm-1"><input class="form-control price0" name="invdetailList[0].price" id="price" value="" required /></div>
-                                        <div class="col-sm-1"><input class="form-control tax0" name="invdetailList[0].tax" id="tax" value="" required /></div>
-                                        <div class="col-sm-1" style="width:11%"><input class="form-control amount0" readonly name="invdetailList[0].amount" id="amount" value="" required />
-                                            <span></span>
+                                        <div class="col-sm-1"><input class="form-control quantity0" name="invdetailList[0].quantity" id="quantity" value="" required placeholder="Qty" /></div>
+                                        <div class="col-sm-1"><input class="form-control price0" name="invdetailList[0].price" id="price" value="" required placeholder="Price" /></div>
+                                        <div class="col-sm-1"><input class="form-control tax0" name="invdetailList[0].tax" id="tax" value="" required placeholder="%" /></div>
+                                        <div class="col-sm-1" style="width:11%"><input type="hidden" class="form-control amount0 amountfield" readonly name="invdetailList[0].amount" id="amount" value="" />
+                                            <input type="text" class="form-control amountlabel0" disabled="" id="amountlabel" value="" required />
                                         </div>
-                                        <div class="col-sm-1" style="width:4%"><a href="javascript:void(0)" class="remove-item pull-right " style="display: none;font-size: 20;" onclick="removeRow('0')">×</a></div>
+                                        <div class="col-sm-1" style="width:4%"><a href="javascript:void(0)" class="remove-item pull-right " style="display: none;font-size: 24px;color: red" onclick="removeRow('0')">×</a></div>
                                     </div>
                                 </div>
                                     
@@ -218,22 +218,26 @@
                                 </div>
                                 <div class="form-group control-group ">
                                     <label class="col-sm-1"><spring:message code="label.invoice.totalprice"></spring:message></label>
-                                <span class="col-sm-2"><input class="form-control datepicker" type="text" id="subtotal" name="subtotal" value="" required readonly=""/></span>
+                                <span class="col-sm-2"><input type="hidden" id="subtotal" name="subtotal" value="" />
+                                <input class="form-control " type="text" id="subtotallabel" name="subtotallabel" value="" disabled=""/></span>
                                     <span id="subtotalError" class="alert alert-danger col-sm-2" style="display:none"></span>
                                 </div>
                                 <div class="form-group control-group ">
                                     <label class="col-sm-1"><spring:message code="label.invoice.totaltax"></spring:message></label>
-                                    <span class="col-sm-2"><input class="form-control " type="text" id="totaltax" name="tax" value="" readonly=""/></span>
+                                    <span class="col-sm-2"><input type="hidden" id="totaltax" name="tax" value="" />
+                                    <input class="form-control " type="text" id="totaltaxlabel" name="taxlabel" value="" disabled=""/></span>
                                     <span id="taxError" class="alert alert-danger col-sm-2" style="display:none"></span>
                                 </div>
                                 <div class="form-group control-group ">
                                     <label class="col-sm-1"><spring:message code="label.invoice.totalamount"></spring:message></label>
-                                    <span class="col-sm-2"><input class="form-control datepicker" type="text" id="totalamount" name="total" value="" readonly=""/></span>
+                                    <span class="col-sm-2"><input type="hidden" id="totalamount" name="total" value="" />
+                                        <input class="form-control " type="text" id="totalamountlabel" name="totallabel" value="" disabled=""/></span>
                                     <span id="amountError" class="alert alert-danger col-sm-2" style="display:none"></span>
                                 </div>
                                     
                                 <div class="form-group control-group col-sm-12">
-                                    <br><button type="submit" class="btn btn-primary">
+                                    <br><button class="btn btn-danger" type="reset">Reset</button>
+                                    <button type="submit" class="btn btn-primary">
                                     <spring:message code="label.invoice.form.submit"></spring:message>
                                     </button>
 
@@ -241,25 +245,21 @@
                         </form>
                         <br>
 
-                        <button id="myBtn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                            Launch demo modal
-                        </button>
-
 
                         <!-- Modal -->
                         <div class="modal fade" id="customermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <span class="alert alert-danger col-sm-8" id="modalError" style="display:none"></span>
-                            <form id="customerform" class="customerform" method="post" role="form">
+                            <form id="customerform" class="customerform" method="post" role="">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                            <h4 class="modal-title" id="myModalLabel"><spring:message code="label.customer.modaltitle"></spring:message></h4>
+                                            <span class="alert alert-danger " id="modalError" style="display:none"></span>
                                         </div>
                                         <div class="modal-body">
                                             <div class="form-group control-group col-sm-13">
                                                 <label class="col-sm-3"><spring:message code="label.customer.name"></spring:message></label>
-                                                <span class="col-sm-8"><input class="form-control " type="text" id="name" name="name" value="" /></span>
+                                                <span class="col-sm-8"><input class="form-control " type="text" id="name" name="name" value="" autofocus/></span>
                                                 <span id="nameError" class="alert alert-danger col-sm-3" style="display:none"></span>
                                             </div>
                                             <div class="col-sm-13">
@@ -280,8 +280,8 @@
                                                 <span id="emailError" class="alert alert-danger col-sm-3" style="display:none"></span>
                                             </div>
                                             <div class="form-group control-group col-sm-13">
-                                                <label class="col-sm-3"><spring:message code="label.customer.streetAddress"></spring:message></label>
-                                                <span class="col-sm-8"><input class="form-control " type="text" id="streetAddress" name="streetAddress" value="" /></span>
+                                                <label class="col-sm-3" style="margin:-1px"><spring:message code="label.customer.streetAddress"></spring:message></label>
+                                                <span class="col-sm-8" style="margin-left:1px"><input class="form-control " type="text" id="streetAddress" name="streetAddress" value="" /></span>
                                                 <span id="streetAddressError" class="alert alert-danger col-sm-3" style="display:none"></span>
                                             </div>
                                             <div class="col-sm-13">
@@ -370,6 +370,7 @@
                     $clone.find('input[id="price"]').removeClass('price'+rowid).addClass('price'+counter);
                     $clone.find('input[id="tax"]').removeClass('tax'+rowid).addClass('tax'+counter);
                     $clone.find('input[id="amount"]').removeClass('amount'+rowid).addClass('amount'+counter);
+                    $clone.find('input[id="amountlabel"]').removeClass('amountlabel'+rowid).addClass('amountlabel'+counter);
                     $clone.removeClass('row'+rowid).addClass('row'+counter);
                     $clone.attr('data-id',counter);
 
@@ -397,7 +398,9 @@
 
             function saveInvoice(event){
                 event.preventDefault();
-                var formData= $('form').serialize();
+                renameFields();
+                var formData= $('#addInvoiceForm').serialize();
+                
                 $.post("<c:url value="/invoice/add"/>",formData ,function(data){
                     if(data.message == "success"){
                         window.location.href = "<c:url value="/invoices/add"></c:url>"+ "?message=" + data.message;
@@ -423,7 +426,7 @@
                     if(data.message == "success"){
                         console.log("Customer added..."+data);
                         if(data.message && data.message=="success"){
-                            $("#customer").append("<option selected >"+product+"</option>").val(data.customobj.name);
+                            $("#customer").append("<option selected >"+data.customobj.name+"</option>").val(data.customobj.name);
                             $('#customermodal').modal('hide')
                             console.log("Customer added.");
                         }else{
@@ -437,32 +440,22 @@
                     $("#modalError").show().append(data.responseJSON.error+"<br>");
                 });
             }
-            /* Add New Product */
-            /* document.getElementById("product_Name").onchange = function(){
-        if(this.selectedIndex == 1){
-                var updatedUrl = this.value;
-                var url = window.location.href;
-                var newText = url.replace(/(invoices).*?()/, updatedUrl);
-                window.location.href = newText; 
-        }
-}; */
 
-            document.getElementById("product_Name").onchange = function(){
-                if(this.selectedIndex == 1){
-                    $('#my-modal').modal('show')
-		
-                    var data = $(this).serializeObject();
-                    json_data = JSON.stringify(data);
-                    $("#results").text(json_data); 
-                    $(".modal-body").text(json_data); 
-
-                    // $("#results").text(data);
-
-                    ev.preventDefault();
-	
-                }
-            };
-
+            function renameFields(){
+                var $tr    = $('.table-row');
+                var index=0;
+                $tr.each(function(){
+                    row = $(this);
+                    row.find('select').attr('name','invdetailList['+index+'].product');
+                    row.find('input[id="description"]').attr('name','invdetailList['+index+'].description');
+                    row.find('input[id="quantity"]').attr('name','invdetailList['+index+'].quantity');
+                    row.find('input[id="price"]').attr('name','invdetailList['+index+'].price');
+                    row.find('input[id="tax"]').attr('name','invdetailList['+index+'].tax');
+                    row.find('input[id="amount"]').attr('name','invdetailList['+index+'].amount');
+                    index++;
+                    
+                });
+            }
             function getContextPath() {
                return "<c:out value="${pageContext.request.contextPath}" />";
             }

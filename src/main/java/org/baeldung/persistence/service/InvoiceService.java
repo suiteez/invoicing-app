@@ -4,6 +4,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.baeldung.persistence.dao.IInvoiceRespository;
+import org.baeldung.persistence.dao.ProductRespository;
 import org.baeldung.persistence.model.Customer;
 import org.baeldung.persistence.model.Invoice;
 import org.baeldung.persistence.model.Invoicedetail;
@@ -24,6 +25,9 @@ public class InvoiceService implements IInvoiceService {
         @Autowired
         private IProductService productService;
         
+        @Autowired
+        private ProductRespository productRespository;
+        
 	@Override
 	public Invoice addNewInvoice(InvoiceDto invoiceDto) {
 		
@@ -36,6 +40,12 @@ public class InvoiceService implements IInvoiceService {
                 List<Invoicedetail> invlist = invoiceDto.getInvdetailList();
                 for(Invoicedetail invdetail:invlist){
                     Product prd = productService.findProductByName(invdetail.getProduct()!=null?invdetail.getProduct():"");
+                    //save the product extra fields too.
+                    if(prd!=null){
+                        prd.setDescription(invdetail.getDescription());
+                        prd.setPrice(invdetail.getPrice());
+                        productRespository.save(prd);
+                    }
                     invdetail.setProductid(prd!=null?prd.getId():0);
                 }
                 invoice.setInvdetailList(invoiceDto.getInvdetailList()!=null?invoiceDto.getInvdetailList():null);
@@ -53,5 +63,11 @@ public class InvoiceService implements IInvoiceService {
 		
 		repository.delete(invoice); 
 	}
+
+    @Override
+    public List<Invoice> listInvoices() {
+        return repository.findAll();
+    }
 	
+        
 }
