@@ -35,6 +35,7 @@ public class InvoiceService implements IInvoiceService {
                 Customer customoer = customerService.findCustomerByName(invoiceDto.getCustomer()!=null?invoiceDto.getCustomer():null);
 		
 		invoice.setCustomer(customoer!=null?customoer:null);
+                invoice.setStatus(invoiceDto.getStatus());
                 invoice.setInvoicedate(invoiceDto.getInvoicedate()!=null?invoiceDto.getInvoicedate():null);
                 invoice.setDuedate(invoiceDto.getDuedate()!=null?invoiceDto.getDuedate():null);
                 List<Invoicedetail> invlist = invoiceDto.getInvdetailList();

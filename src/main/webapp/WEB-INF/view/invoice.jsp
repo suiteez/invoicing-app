@@ -159,6 +159,7 @@
                             </c:if>
                             <span class="alert alert-danger col-sm-11" id="globalError" style="display:none"></span>
                             <form action="/" method="POST" class="" enctype="utf8" id="addInvoiceForm" >
+                                <input type="hidden" name="status" id="status" value="0"/>
                                 <div class="form-group control-group ">
                                     <label class="col-sm-2"><spring:message code="label.invoice.invoicedate"></spring:message></label>
                                     <span class="col-sm-2"><input class="form-control datepicker" type="text" id="invoicedate" name="invoicedate" placeholder="MM/dd/yyyy" value="" required/></span>
@@ -214,7 +215,7 @@
                                 </div>
                                     
                                 <div class="form-group control-group col-sm-12">
-                                    <a href="#" title="add-new-invoice" class="add-new-invoice">+ Add new Product</a> 
+                                        <a href="#" title="add-new-invoice" class="add-new-invoice">+ Add new Product</a> 
                                 </div>
                                 <div class="form-group control-group ">
                                     <label class="col-sm-1"><spring:message code="label.invoice.totalprice"></spring:message></label>
@@ -237,6 +238,9 @@
                                     
                                 <div class="form-group control-group col-sm-12">
                                     <br><button class="btn btn-danger" type="reset">Reset</button>
+                                    <button class="btn btn-primary" type="submit" id="savedraft">
+                                        <spring:message code="label.invoice.form.draft"></spring:message>
+                                    </button>
                                     <button type="submit" class="btn btn-primary">
                                     <spring:message code="label.invoice.form.submit"></spring:message>
                                     </button>
@@ -346,6 +350,15 @@
                 $('#customerform').submit(function(event){
                     saveCustomer(event);
                 });
+                
+                //draft listener...
+                $("#savedraft").click(function (event){
+//                    event.preventDefault();
+                    //save as draft status==1;
+                    $("#status").val("1");
+//                    $('#addInvoiceForm').submit();
+                    return true;
+                });
                 //button click event
                 jQuery('.add-new-invoice')
                 .click(
@@ -402,11 +415,13 @@
                 var formData= $('#addInvoiceForm').serialize();
                 
                 $.post("<c:url value="/invoice/add"/>",formData ,function(data){
+                    $("#status").val("0");
                     if(data.message == "success"){
                         window.location.href = "<c:url value="/invoices/add"></c:url>"+ "?message=" + data.message;
                     }
                 })
                 .fail(function(data) {
+                    $("#status").val("0");
 //                    var errors = $.parseJSON(data.responseJSON.message);
                     $("#globalError").show().append(data.responseJSON.error+"<br>");
                     $.each( data.responseJSON.message, function( index,item ){

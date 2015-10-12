@@ -24,6 +24,8 @@ public class InvoiceDto {
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date duedate;
     @NotNull
+    private Integer status;
+    @NotNull
     private String customer;
     @NotNull
     @NumberFormat(style= NumberFormat.Style.CURRENCY)
@@ -67,6 +69,14 @@ public class InvoiceDto {
 
     public void setCustomer(String customer) {
         this.customer = customer;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public BigDecimal getSubtotal() {
