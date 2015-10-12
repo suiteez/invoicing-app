@@ -32,6 +32,7 @@ $(document).ready(function () {
         $('#duedate').datepicker('hide');
     });
     
+    
 
 });
 
@@ -41,21 +42,27 @@ function initListners(rowno){
     //        
     //    });
     calc = function(){
-        var qty = $(".quantity"+rowno).val()?$(".quantity"+rowno).val():0;
-        var price = $(".price"+rowno).val()?$(".price"+rowno).val():0;
-        var tax = $(".tax"+rowno).val()?$(".tax"+rowno).val():0;
+        calcrow(rowno);
         
-        var total = qty*price;
-        var taxamount = total * tax/100;
-        var amount = total-taxamount;
-        $(".amount"+rowno).val(amount);
-        
-        calctotal();
     };
     $(".quantity"+rowno).change(calc);
     $(".price"+rowno).change(calc);
     $(".tax"+rowno).change(calc);
     
+}
+function calcrow(rowno){
+    var qty = $(".quantity"+rowno).val()?$(".quantity"+rowno).val():0;
+    var price = $(".price"+rowno).val()?$(".price"+rowno).val():0;
+    var tax = $(".tax"+rowno).val()?$(".tax"+rowno).val():0;
+
+    var total = qty*price;
+    var taxamount = total * tax/100;
+    var amount = total-taxamount;
+    $(".amount"+rowno).val(amount);
+
+    //set amount field...
+    $(".amountlabel"+rowno).val(accounting.formatMoney(amount));
+    calctotal();
 }
 
 function calctotal(){
@@ -63,18 +70,24 @@ function calctotal(){
     var totalprice = 0;
     var totaltaxamount = 0;
     var totalamount = 0;
-    while($(".amount"+count) && $(".amount"+count).val() && 
-            $(".amount"+count).val()>="0"){
-        var qty = $(".quantity"+count).val()?$(".quantity"+count).val():0;
-        var price = $(".price"+count).val()?$(".price"+count).val():0;
+    var $tr    = $('.table-row');
+    $tr.each(function(){
+        var row = $(this);
+        var qty = row.find('input[id="quantity"]').val()?row.find('input[id="quantity"]').val():0;
+        var price = row.find('input[id="price"]').val()?row.find('input[id="price"]').val():0;
         totalprice = totalprice + (qty*price);
-        totaltaxamount += ((qty*price)*parseFloat($(".tax"+count).val()?$(".tax"+count).val():0)/100);
-        totalamount += parseFloat($(".amount"+count).val());
+        totaltaxamount += ((qty*price)*parseFloat(row.find('input[id="tax"]').val()?row.find('input[id="tax"]').val():0)/100);
+        totalamount += parseFloat(row.find('input[id="amount"]').val());
         count++;
-    }
+    });
+    
     $("#subtotal").val(totalprice);
     $("#totalamount").val(totalamount);
     $("#totaltax").val(totaltaxamount);
+    
+    $("#subtotallabel").val(accounting.formatMoney(totalprice));
+    $("#totalamountlabel").val(accounting.formatMoney(totalamount));
+    $("#totaltaxlabel").val(accounting.formatMoney(totaltaxamount));
 }
 function initAutocomp(element){
     $(function() {
@@ -118,6 +131,20 @@ function autocompserach(oEvent, oUi) {
                 product:-1
             });
         }
+    }else if(sValue=="" && aSearch.length==0){
+        if(oEvent.target.id=='customer'){
+            aSearch.push({
+                label:"Add New Customer",
+                value:sValue,
+                product:-1
+            });
+        }else{
+            aSearch.push({
+                label:"Type Product Name to Enter New Product",
+                value:sValue,
+                product:1
+            });
+        }
     }
     // change search array
     $(this).autocomplete('option', 'source', aSearch);
@@ -139,8 +166,9 @@ function patchAutocomplete() {
 function clickAdd(ev,product){
     console.log("add clicked..."+product);
     if(ev.target.id=='customer'){
-        
+        $("#name").val(product);
         $( "#customermodal" ).modal( "show" );
+        $("#name").focus();
 //        $.post(getContextPath()+"/customer/addajax",
 //        {
 //            name: product
@@ -179,5 +207,5 @@ function clickAdd(ev,product){
 function removeRow(rowno){
     var $tr    = $('.row'+rowno);
     $tr.remove();
-
+    calcrow(rowno);
 }

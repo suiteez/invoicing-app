@@ -248,13 +248,13 @@
 
                         <!-- Modal -->
                         <div class="modal fade" id="customermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <span class="alert alert-danger col-sm-8" id="modalError" style="display:none"></span>
                             <form id="customerform" class="customerform" method="post" role="">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                             <h4 class="modal-title" id="myModalLabel"><spring:message code="label.customer.modaltitle"></spring:message></h4>
+                                            <span class="alert alert-danger " id="modalError" style="display:none"></span>
                                         </div>
                                         <div class="modal-body">
                                             <div class="form-group control-group col-sm-13">
@@ -398,7 +398,9 @@
 
             function saveInvoice(event){
                 event.preventDefault();
+                renameFields();
                 var formData= $('#addInvoiceForm').serialize();
+                
                 $.post("<c:url value="/invoice/add"/>",formData ,function(data){
                     if(data.message == "success"){
                         window.location.href = "<c:url value="/invoices/add"></c:url>"+ "?message=" + data.message;
@@ -438,32 +440,22 @@
                     $("#modalError").show().append(data.responseJSON.error+"<br>");
                 });
             }
-            /* Add New Product */
-            /* document.getElementById("product_Name").onchange = function(){
-        if(this.selectedIndex == 1){
-                var updatedUrl = this.value;
-                var url = window.location.href;
-                var newText = url.replace(/(invoices).*?()/, updatedUrl);
-                window.location.href = newText; 
-        }
-}; */
 
-            document.getElementById("product_Name").onchange = function(){
-                if(this.selectedIndex == 1){
-                    $('#my-modal').modal('show')
-		
-                    var data = $(this).serializeObject();
-                    json_data = JSON.stringify(data);
-                    $("#results").text(json_data); 
-                    $(".modal-body").text(json_data); 
-
-                    // $("#results").text(data);
-
-                    ev.preventDefault();
-	
-                }
-            };
-
+            function renameFields(){
+                var $tr    = $('.table-row');
+                var index=0;
+                $tr.each(function(){
+                    row = $(this);
+                    row.find('select').attr('name','invdetailList['+index+'].product');
+                    row.find('input[id="description"]').attr('name','invdetailList['+index+'].description');
+                    row.find('input[id="quantity"]').attr('name','invdetailList['+index+'].quantity');
+                    row.find('input[id="price"]').attr('name','invdetailList['+index+'].price');
+                    row.find('input[id="tax"]').attr('name','invdetailList['+index+'].tax');
+                    row.find('input[id="amount"]').attr('name','invdetailList['+index+'].amount');
+                    index++;
+                    
+                });
+            }
             function getContextPath() {
                return "<c:out value="${pageContext.request.contextPath}" />";
             }
