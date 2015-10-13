@@ -203,7 +203,7 @@
                                             <div class="col-sm-1" style="width: 10%"><spring:message code="label.invoice.quantity"></spring:message></div>
                                             <div class="col-sm-1" style="width: 10%"><spring:message code="label.invoice.price"></spring:message></div>
                                             <div class="col-sm-1" style="width: 10%"><spring:message code="label.invoice.tax"></spring:message></div>
-                                            <div class="col-sm-1" style="width:11%"><spring:message code="label.invoice.amount"></spring:message></div>
+                                            <div class="col-sm-1" style="width:12%"><spring:message code="label.invoice.amount"></spring:message></div>
                                                 <div class="col-sm-1" style="width:4%"></div>
 
                                             </div>
@@ -221,7 +221,7 @@
                                             <div class="col-sm-1" style="width: 10%"><input class="form-control quantity0" name="invdetailList[0].quantity" id="quantity" value="" required placeholder="Qty" /></div>
                                             <div class="col-sm-1" style="width: 10%"><input class="form-control price0" name="invdetailList[0].price" id="price" value="" required placeholder="Price" /></div>
                                             <div class="col-sm-1" style="width: 10%"><input class="form-control tax0" name="invdetailList[0].tax" id="tax" value="" required placeholder="%" /></div>
-                                            <div class="col-sm-1" style="width:11%"><input type="hidden" class="form-control amount0 amountfield" readonly name="invdetailList[0].amount" id="amount" value="" />
+                                            <div class="col-sm-1" style="width:12%"><input type="hidden" class="form-control amount0 amountfield" readonly name="invdetailList[0].amount" id="amount" value="" />
                                                 <input type="text" class="form-control amountlabel0" disabled="" id="amountlabel" value="" required />
                                             </div>
                                             <div class="col-sm-1" style="width:4%"><a href="javascript:void(0)" class="remove-item pull-right " style="display: none;font-size: 24px;color: red" onclick="removeRow('0')">×</a></div>
