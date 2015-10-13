@@ -6,6 +6,9 @@
         Purpose of the stylesheet follows.
 */
 
+@charset "utf-8";
+
+
 root { 
     display: block;
 }
@@ -16,7 +19,7 @@ root {
     font-size: 18px;
     font-family: Arial,Helvetica,sans-serif;
     font-weight: bold;
-    color: #999999;
+/*    color: #999999;*/
 }
 .table-row {
     float:left;
@@ -34,3 +37,80 @@ root {
 #customerform div span {
     margin-bottom: 5px;
 }
+
+.invoice_number{
+    padding-bottom: 20px;
+/*    border-bottom: 1px solid rgba(0,0,0,0.05);*/
+    font-size: 20px;
+}
+
+.controls {
+    float: left;
+    margin-left: 0;
+    font-size: 28px;
+    line-height: 28px;
+}
+
+.invoice-number > label{
+    width: auto;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 28px;
+    padding-top: 0;
+    margin-left: 20px;
+    margin-right: 3px;
+    float: left;
+}
+
+/* CSS Document */
+.mainbg{
+	background: #f4f4f4 none repeat scroll 0 0;
+	border: 1px solid #d3d3d3;
+	border-radius: 10px;	
+	
+}
+.heading{
+	color: #50575b;
+    display: block;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+	 font-size: 31px;
+    font-weight: 200;
+    line-height: 40px;
+	padding:15px;
+	}
+.inner{
+	background: #f9f9f9 none repeat scroll 0 0;
+	border: 1px solid #d3d3d3;
+	border-radius: 5px;	
+	margin:5px;
+}
+.heading2{
+    max-width: 890px;
+    min-height: 28px;
+    min-width: 15px;
+	padding:15px;
+	}
+.detail{
+	margin-top:10px;
+	
+	}
+.table-header{
+	background-color: #84969e;
+	background-image: -moz-linear-gradient(center top , #909fa7, #738791);
+	background-repeat: repeat-x;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.2) inset;
+	color: #fff;
+	height:35px;
+	margin:10px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
+.table-header label{
+	margin-top:7px;
+	}
+.border{
+	border:1px solid #CCC;
+	}
