@@ -18,7 +18,7 @@ $(document).ready(function () {
     
     patchAutocomplete();
     //initialize the jquery auto completer.
-    initAutocomp($( "#product_Name" ));
+    initAutocomp($( "#product_Name0" ));
     
     //init auto complete for customer...
     initAutocomp($("#customer"));
@@ -57,7 +57,7 @@ function calcrow(rowno){
 
     var total = qty*price;
     var taxamount = total * tax/100;
-    var amount = total-taxamount;
+    var amount = total+taxamount;
     $(".amount"+rowno).val(amount);
 
     //set amount field...
@@ -131,7 +131,8 @@ function autocompserach(oEvent, oUi) {
                 product:-1
             });
         }
-    }else if(sValue=="" && aSearch.length==0){
+    }else if(sValue==""){
+//    }else if(sValue=="" && aSearch.length==0){
         if(oEvent.target.id=='customer'){
             aSearch.push({
                 label:"Add New Customer",
@@ -140,9 +141,9 @@ function autocompserach(oEvent, oUi) {
             });
         }else{
             aSearch.push({
-                label:"Type Product Name to Enter New Product",
+                label:"Add New Product",
                 value:sValue,
-                product:1
+                product:-1
             });
         }
     }
@@ -186,6 +187,11 @@ function clickAdd(ev,product){
 //        });
         
     }else{
+        $("#productrowid").val($("#"+ev.target.id).closest("div[data-id]").attr("data-id"));
+        $("#productName").val(product);
+        $( "#productmodal" ).modal( "show" );
+        $("#productName").focus();
+        /*
         $.post(getContextPath()+"/product/addajax",
         {
             productName: product
@@ -200,7 +206,7 @@ function clickAdd(ev,product){
         })
         .fail(function(data) {
             $("#errormsg").show().html(data.responseJSON.message);
-        });
+        });*/
     }
 }
 

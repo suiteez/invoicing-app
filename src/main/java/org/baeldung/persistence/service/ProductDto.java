@@ -15,10 +15,9 @@ public class ProductDto {
     private String incomeAccount;
 
     @NotNull
-    @Size(min = 1)
     private BigDecimal price;
     
-    @Size(min = 10)
+    @NotNull
     private String description;
     
     

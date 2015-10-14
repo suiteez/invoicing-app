@@ -1,5 +1,6 @@
 package org.baeldung.web.controller;
 
+import javax.validation.Valid;
 import org.baeldung.persistence.model.Product;
 import org.baeldung.persistence.service.IProductService;
 import org.baeldung.persistence.service.IUserService;
@@ -74,13 +75,13 @@ public class ProductController {
 
     @RequestMapping(value = "/product/addajax", method = RequestMethod.POST)
     @ResponseBody
-    public GenericResponse addProductAjax(@RequestParam("productName") String productName) {
-        LOGGER.debug("Adding product with information: {}", productName);
-        ProductDto productDto = new ProductDto();
-        productDto.setProductName(productName);
-        productService.createNewProduct(productDto);
+    public GenericResponse addProductAjax(@Valid final ProductDto productDto) {
+        LOGGER.debug("Adding product with information: {}", productDto);
+//        ProductDto productDto = new ProductDto();
+//        productDto.setProductName(productName);
+        Product prd = productService.createNewProduct(productDto);
 
-        return new GenericResponse("success");
+        return new GenericResponse("success",prd);
     }
 
     @RequestMapping("/remove/product/{id}")

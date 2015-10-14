@@ -19,6 +19,7 @@
             .attr('id',this.element.attr('id'))
             .val( value )
             .attr( "title", "" )
+            .attr("placeholder",this.element.attr('palceholder'))
             .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
             .autocomplete({
                 delay: 50,
@@ -138,7 +139,10 @@
             }, 2500 );
             this.input.autocomplete( "instance" ).term = "";
         },
- 
+        autocomplete : function(value) {
+            this.element.val(value);
+            this.input.val(value);
+        },
         _destroy: function() {
             this.wrapper.remove();
             this.element.show();
