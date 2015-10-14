@@ -6,14 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import org.baeldung.persistence.model.Customer;
-import org.baeldung.persistence.model.Invoicedetail;
+import org.baeldung.persistence.model.Estimationdetail;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
-public class InvoiceDto {
+public class EstimationDto {
 	
     private Integer id;
 	
@@ -23,8 +21,6 @@ public class InvoiceDto {
     @NotNull
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date duedate;
-    @NotNull
-    private Integer status;
     @NotNull
     private String customer;
     @NotNull
@@ -37,7 +33,7 @@ public class InvoiceDto {
     @NumberFormat(style= NumberFormat.Style.CURRENCY)
     private BigDecimal total;
     @NotEmpty
-    private List<Invoicedetail> invdetailList= new ArrayList<>();
+    private List<Estimationdetail> invdetailList= new ArrayList<>();
     
 	public Integer getId() {
 		return id;
@@ -71,14 +67,6 @@ public class InvoiceDto {
         this.customer = customer;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public BigDecimal getSubtotal() {
         return subtotal;
     }
@@ -103,14 +91,23 @@ public class InvoiceDto {
         this.total = total;
     }
 
-    public List<Invoicedetail> getInvdetailList() {
+    public List<Estimationdetail> getInvdetailList() {
         return invdetailList;
     }
 
-    public void setInvdetailList(List<Invoicedetail> invdetailList) {
+    public void setInvdetailList(List<Estimationdetail> invdetailList) {
         this.invdetailList = invdetailList;
     }
 
+
+    
+//	@Override
+//	public String toString() {
+//		return "InvoiceDto [id=" + id + ", product=" + product
+//				+ ", description=" + description + ", quantity=" + quantity
+//				+ ", price=" + price + ", tax=" + tax + ", amount=" + amount
+//				+ "]";
+//	}
 
     @Override
     public String toString() {

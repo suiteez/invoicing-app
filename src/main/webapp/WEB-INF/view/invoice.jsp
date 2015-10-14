@@ -156,7 +156,8 @@
                                 <h1 class="heading"><spring:message code="label.invoice.addinvoiceheader"></spring:message></h1>
                             </div>
                             <form action="/" method="POST" class="" enctype="utf8" id="addInvoiceForm" >
-                            <div class="container-fluid">
+                                <input type="hidden" name="status" id="status" value="0"/>
+                                <div class="container-fluid">
                                 <div class="inner">
                                     <fieldset>
                                         <h3 class="heading2"><spring:message code="label.invoice.invoiceno"></spring:message>: Auto
@@ -260,6 +261,9 @@
                                     </div>
                                     <div class="container text-center form-inline"><br>
                                         <p><button class="btn btn-danger" type="reset">Reset</button>
+                                        <button class="btn btn-primary" type="submit" id="savedraft">
+                                            <spring:message code="label.invoice.form.draft"></spring:message>
+                                        </button>
                                         <button type="submit" class="btn btn-primary">
                                         <spring:message code="label.invoice.form.submit"></spring:message>
                                         </button></p>
@@ -428,6 +432,13 @@
                     $('#productform').on('hidden.bs.modal', function() {
                         $(this).removeData('bs.modal');
                     });
+                    
+                    //draft listener...
+                    $("#savedraft").click(function (event){
+                        $("#status").val("1");
+                        return true;
+                    });
+
                     //button click event
                     jQuery('.add-new-invoice')
                     .click(
@@ -484,12 +495,13 @@
                     var formData= $('#addInvoiceForm').serialize();
                 
                     $.post("<c:url value="/invoice/add"/>",formData ,function(data){
+                        $("#status").val("0");
                         if(data.message == "success"){
                             window.location.href = "<c:url value="/invoices/add"></c:url>"+ "?message=" + data.message;
                         }
                     })
                     .fail(function(data) {
-                        //                    var errors = $.parseJSON(data.responseJSON.message);
+                        $("#status").val("0");
                         $("#globalError").show().append(data.responseJSON.error+"<br>");
                         $.each( data.responseJSON.message, function( index,item ){
                             $("#"+item.field+"Error").show().html(item.defaultMessage);
