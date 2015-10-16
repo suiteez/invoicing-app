@@ -5,23 +5,11 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.baeldung.persistence.dao.CustomerRespository;
-import org.baeldung.persistence.dao.PasswordResetTokenRepository;
 import org.baeldung.persistence.dao.ProductRespository;
-import org.baeldung.persistence.dao.RoleRepository;
-import org.baeldung.persistence.dao.VerificationTokenRepository;
-import org.baeldung.persistence.model.Customer;
-import org.baeldung.persistence.model.PasswordResetToken;
 import org.baeldung.persistence.model.Product;
-import org.baeldung.persistence.model.User;
-import org.baeldung.validation.EmailExistsException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.mysql.fabric.xmlrpc.base.Array;
 
 @Service
 @Transactional

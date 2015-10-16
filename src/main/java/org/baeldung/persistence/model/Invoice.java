@@ -39,6 +39,7 @@ public class Invoice {
     private BigDecimal subtotal;
     private BigDecimal tax;
     private BigDecimal total;
+    private Integer status;
 //    @OneToMany(mappedBy="invoice")
     @OneToMany(cascade= CascadeType.ALL)
     @JoinColumn(name="invoice_id")
@@ -121,13 +122,20 @@ public class Invoice {
         this.invdetailList = invdetailList;
     }
 
-    
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
 
     @Override
     public String toString() {
         return "Invoice{" + "id=" + id + ", invoicedate=" + invoicedate + ", "
                 + "duedate=" + duedate + ", customer=" + customer + ", "
                 + "subtotal=" + subtotal + ", tax=" + tax + ", total=" + total + 
-                " invoicedetail="+invdetailList+'}';
+                " invoicedetail="+invdetailList+ ", status="+status +'}';
     }
 }
