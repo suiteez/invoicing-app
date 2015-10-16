@@ -1,5 +1,6 @@
 package org.baeldung.persistence.service;
 
+import java.util.Iterator;
 import java.util.List;
 import org.baeldung.persistence.model.Invoice;
 
@@ -10,4 +11,7 @@ public interface IInvoiceService {
     void deleteInvoice(Invoice invoice);
 
     public List<Invoice> listInvoices();
+
+    public Invoice getLastInvoice();
+
 }

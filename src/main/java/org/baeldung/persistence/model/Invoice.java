@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
@@ -12,12 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 
 @Entity
@@ -27,7 +29,14 @@ public class Invoice {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Basic(optional = false)
+//    @Column(name = "id", nullable = false)
+//    @GenericGenerator(name = "seq_id", strategy = "org.baeldung.persistence.conf.CustomGenerator", parameters = { @Parameter(name = "sequence", value = "INVOICE_PRM_SEQ") })
+//    @GeneratedValue(generator = "seq_id")
     private int id;
+    private String invoicelabel;
+    private String invoiceno;
+    
     @Temporal(TemporalType.DATE)
     private Date invoicedate;
     @Temporal(TemporalType.DATE)
@@ -59,6 +68,22 @@ public class Invoice {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getInvoicelabel() {
+        return invoicelabel;
+    }
+
+    public void setInvoicelabel(String invoicelabel) {
+        this.invoicelabel = invoicelabel;
+    }
+
+    public String getInvoiceno() {
+        return invoiceno;
+    }
+
+    public void setInvoiceno(String invoiceno) {
+        this.invoiceno = invoiceno;
     }
 
     public Date getInvoicedate() {
@@ -130,12 +155,14 @@ public class Invoice {
         this.status = status;
     }
 
-
+    
     @Override
     public String toString() {
-        return "Invoice{" + "id=" + id + ", invoicedate=" + invoicedate + ", "
-                + "duedate=" + duedate + ", customer=" + customer + ", "
-                + "subtotal=" + subtotal + ", tax=" + tax + ", total=" + total + 
-                " invoicedetail="+invdetailList+ ", status="+status +'}';
+        return "Invoice{" + "id=" + id + ", invoicelabel=" + invoicelabel + 
+                ", invoiceno=" + invoiceno + ", invoicedate=" + invoicedate + 
+                ", duedate=" + duedate + ", status=" + status + ", customer=" + customer + 
+                ", subtotal=" + subtotal + ", tax=" + tax + ", total=" + total + 
+                ", invdetailList=" + invdetailList + '}';
     }
+
 }

@@ -1,13 +1,10 @@
 package org.baeldung.persistence.service;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import org.baeldung.persistence.model.Customer;
 import org.baeldung.persistence.model.Invoicedetail;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,7 +13,11 @@ import org.springframework.format.annotation.NumberFormat;
 public class InvoiceDto {
 	
     private Integer id;
-	
+    @NotNull
+    private String invoicelabel;
+    @NotNull
+    private String invoiceno;
+    
     @NotNull
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date invoicedate;
@@ -46,6 +47,22 @@ public class InvoiceDto {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+    public String getInvoicelabel() {
+        return invoicelabel;
+    }
+
+    public void setInvoicelabel(String invoicelabel) {
+        this.invoicelabel = invoicelabel;
+    }
+
+    public String getInvoiceno() {
+        return invoiceno;
+    }
+
+    public void setInvoiceno(String invoiceno) {
+        this.invoiceno = invoiceno;
+    }  
 
     public Date getInvoicedate() {
         return invoicedate;
@@ -114,10 +131,11 @@ public class InvoiceDto {
 
     @Override
     public String toString() {
-        return "InvoiceDto{" + "id=" + id + ", invoicedate=" + invoicedate + ", "
-                + "duedate=" + duedate + ", customer=" + customer + ", "
-                + "subtotal=" + subtotal + ", tax=" + tax + ", total=" + total + ", "
-                + "invdetailList=" + invdetailList + '}';
+        return "InvoiceDto{" + "id=" + id + ", invoicelabel=" + invoicelabel + 
+                ", invoiceno=" + invoiceno + ", invoicedate=" + invoicedate + 
+                ", duedate=" + duedate + ", status=" + status + ", customer=" + customer + 
+                ", subtotal=" + subtotal + ", tax=" + tax + ", total=" + total + 
+                ", invdetailList=" + invdetailList + '}';
     }
 
 	

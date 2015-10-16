@@ -10,4 +10,6 @@ public interface IEstimationService {
     void deleteInvoice(Estimation invoice);
 
     public List<Estimation> listInvoices();
+
+    public Estimation getLastInvoice();
 }

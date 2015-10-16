@@ -10,6 +10,8 @@ import org.baeldung.persistence.model.Estimation;
 import org.baeldung.persistence.model.Estimationdetail;
 import org.baeldung.persistence.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,7 +35,8 @@ public class EstimationService implements IEstimationService {
 		
 		final Estimation invoice = new Estimation();
                 Customer customoer = customerService.findCustomerByName(invoiceDto.getCustomer()!=null?invoiceDto.getCustomer():null);
-		
+		invoice.setEstimateno(invoiceDto.getEstimateno());
+                invoice.setEstimatelabel(invoiceDto.getEstimatelabel());
 		invoice.setCustomer(customoer!=null?customoer:null);
                 invoice.setInvoicedate(invoiceDto.getInvoicedate()!=null?invoiceDto.getInvoicedate():null);
                 invoice.setDuedate(invoiceDto.getDuedate()!=null?invoiceDto.getDuedate():null);
@@ -69,6 +72,17 @@ public class EstimationService implements IEstimationService {
         return repository.findAll();
     }
 
+    @Override
+    public Estimation getLastInvoice() {
+        List<Estimation> listinv = repository.findWithPageable(new PageRequest(0, 2, Sort.Direction.DESC, "id"));
+        System.out.println(listinv);
+        if (listinv != null && !listinv.isEmpty()) {
+            return listinv.get(0);
+        } else {
+            return null;
+            
+        }
+    }
 	
         
 }
