@@ -33,6 +33,36 @@ $(document).ready(function () {
     });
     
     
+    $('.invidlabel').click(function () {
+        var dad = $(this).parent().parent();
+        dad.find('.invidlabel').hide();
+        dad.find('input[id="invoiceid"]').show().focus();
+    });
+
+    $("#invoiceid").focusout(function() {
+        var dad = $(this).parent();
+        $(this).hide();
+        if($("#invoiceid").val()){
+            dad.find('label.invidlabel').text($("#invoiceid").val());
+        }
+        dad.find('label.invidlabel').show();
+    });
+    
+    $('.invlabel').click(function () {
+        var dad = $(this).parent().parent();
+        dad.find('.invlabel').hide();
+        $('.invoicelabel').val($('.invlabel').text());
+        dad.find("#invoicelabel").show().focus();
+    });
+
+    $("#invoicelabel").focusout(function() {
+        var dad = $(this).parent();
+        $(this).hide();
+        if($("#invoicelabel").val()){
+            dad.find('label.invlabel').text($("#invoicelabel").val());
+        }
+        dad.find('label.invlabel').show();
+    });
 
 });
 
@@ -112,7 +142,7 @@ function autocompserach(oEvent, oUi) {
                 label:this.text,
                 value:this.value,
                 option:this
-                });
+            });
         //                        aSearch.push(this.text);
         }
     });
@@ -132,7 +162,7 @@ function autocompserach(oEvent, oUi) {
             });
         }
     }else if(sValue==""){
-//    }else if(sValue=="" && aSearch.length==0){
+        //    }else if(sValue=="" && aSearch.length==0){
         if(oEvent.target.id=='customer'){
             aSearch.push({
                 label:"Add New Customer",
@@ -155,9 +185,9 @@ function autocompserach(oEvent, oUi) {
 function patchAutocomplete() {
 
     $.ui.autocomplete.prototype._renderItem = function( ul, item) {
-                return $( "<li values="+item.value+" ></li>" )
-                .text(item.label)
-                .appendTo( ul );
+        return $( "<li values="+item.value+" ></li>" )
+        .text(item.label)
+        .appendTo( ul );
     };
           
 }
@@ -170,28 +200,28 @@ function clickAdd(ev,product){
         $("#name").val(product);
         $( "#customermodal" ).modal( "show" );
         $("#name").focus();
-//        $.post(getContextPath()+"/customer/addajax",
-//        {
-//            name: product
-//        },
-//        function(data){
-//            if(data.message && data.message=="success"){
-//                $("#customer").append("<option selected >"+product+"</option>").val(data.customobj.id);
-//                console.log("Customer added.");
-//            }else{
-//                console.log("Customer not added."+data);
-//            }
-//        })
-//        .fail(function(data) {
-//            $("#errormsg").show().html(data.responseJSON.message);
-//        });
+    //        $.post(getContextPath()+"/customer/addajax",
+    //        {
+    //            name: product
+    //        },
+    //        function(data){
+    //            if(data.message && data.message=="success"){
+    //                $("#customer").append("<option selected >"+product+"</option>").val(data.customobj.id);
+    //                console.log("Customer added.");
+    //            }else{
+    //                console.log("Customer not added."+data);
+    //            }
+    //        })
+    //        .fail(function(data) {
+    //            $("#errormsg").show().html(data.responseJSON.message);
+    //        });
         
     }else{
         $("#productrowid").val($("#"+ev.target.id).closest("div[data-id]").attr("data-id"));
         $("#productName").val(product);
         $( "#productmodal" ).modal( "show" );
         $("#productName").focus();
-        /*
+    /*
         $.post(getContextPath()+"/product/addajax",
         {
             productName: product

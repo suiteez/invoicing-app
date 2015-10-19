@@ -19,14 +19,15 @@ root {
     font-size: 18px;
     font-family: Arial,Helvetica,sans-serif;
     font-weight: bold;
-/*    color: #999999;*/
+    margin-top: 2px;
+    /*    color: #999999;*/
 }
 .table-row {
     float:left;
 }
 .product-table {
     background-color: whitesmoke;
-     margin-top: 15px;
+    margin-top: 15px;
 }
 .modal-content {
     position: relative;
@@ -40,7 +41,7 @@ root {
 
 .invoice_number{
     padding-bottom: 20px;
-/*    border-bottom: 1px solid rgba(0,0,0,0.05);*/
+    /*    border-bottom: 1px solid rgba(0,0,0,0.05);*/
     font-size: 20px;
 }
 
@@ -64,53 +65,134 @@ root {
 }
 
 /* CSS Document */
+body{
+    /*background-color:#ddd;*/
+
+}
 .mainbg{
-	background: #f4f4f4 none repeat scroll 0 0;
-	border: 1px solid #d3d3d3;
-	border-radius: 10px;	
-	
+    background: #f4f4f4 none repeat scroll 0 0;
+    border: 1px solid #d3d3d3;
+    border-radius: 2px;	
+    margin-top:10px;
+
 }
 .heading{
-	color: #50575b;
+    color: #50575b;
     display: block;
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-	 font-size: 31px;
+    font-size: 31px;
     font-weight: 200;
     line-height: 40px;
-	padding:15px;
-	}
+    padding:15px;
+}
 .inner{
-	background: #f9f9f9 none repeat scroll 0 0;
-	border: 1px solid #d3d3d3;
-	border-radius: 5px;	
-	margin:5px;
+    background: #f9f9f9 none repeat scroll 0 0;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;	
+    margin:5px;
 }
 .heading2{
     max-width: 890px;
     min-height: 28px;
     min-width: 15px;
-	padding:15px;
-	}
+    padding:15px;
+}
 .detail{
-	margin-top:10px;
-	
-	}
+    margin-top:10px;
+
+}
 .table-header{
-	background-color: #84969e;
-	background-image: -moz-linear-gradient(center top , #909fa7, #738791);
-	background-repeat: repeat-x;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-	border-top: 1px solid rgba(0, 0, 0, 0.1);
-	box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.2) inset;
-	color: #fff;
-	height:35px;
-	margin:10px;
-	border-top-left-radius:5px;
-	border-top-right-radius:5px;
+    background-color: #84969e;
+    background-image: -moz-linear-gradient(center top , #909fa7, #738791);
+    background-repeat: repeat-x;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.2) inset;
+    color: #fff;
+    height:35px;
+    margin:10px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
 }
 .table-header label{
-	margin-top:7px;
-	}
+    margin-top:7px;
+}
 .border{
-	border:1px solid #CCC;
-	}
+    border:1px solid #CCC;
+}
+.tab-header{
+    background-color: #84969e;
+    background-image: -moz-linear-gradient(center top , #909fa7, #738791);
+    background-repeat: repeat-x;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.2) inset;
+    color: #fff;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+}
+.tabbg{
+    background: #f4f4f4 none repeat scroll 0 0;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;	
+}
+.tab-content{
+    padding-top:5px;
+}
+.nav > li > a{
+    padding:5px 15px;
+
+}
+.nav-tabs > li{
+    background-color: #dcdcdc;
+    background-image: -moz-linear-gradient(center top , #dfdfdf, #d7d7d7);
+    background-repeat: repeat-x;
+    border-top: 1px solid #d3d3d3;
+    box-shadow: 0 -3px 5px -3px rgba(0, 0, 0, 0.05) inset, 1px 1px 0 0 rgba(255, 255, 255, 0.3) inset;
+    float: left;
+    list-style-type: none;
+    position: relative;
+    border-radius:4px 4px 0 0;
+
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    background-color: #f4f4f4 ;
+    background-image: -moz-linear-gradient(center top , #fff, #f4f4f4);
+    background-repeat: repeat-x;
+    box-shadow: 0 -3px 5px -3px #f4f4f4 inset;
+    border-color: #f4f4f4 #f4f4f4 transparent;
+}
+
+.nav-tabs{
+    margin: 0 0 -1px 20px;
+}
+.nav-tabs > li > a {
+    margin-right:0;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    text-transform:uppercase;
+    font-size:13px;
+    color: #999;
+}
+table.dataTable{
+    border:2px solid #CCC;
+    border-radius:5px;
+}
+table.dataTable.no-footer{
+    border-bottom:2px solid #CCC !important;
+}
+.modal-header {
+    background-color: #84969e;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.edit-input {
+    display:none;
+}
+
+.estimateformdiv {
+    background: none repeat scroll 0 0 #f9f9f9;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+}

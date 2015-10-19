@@ -164,9 +164,9 @@
                                     <fieldset>
                                         <h3 class="heading2">
                                             <label class="invlabel" style="background: infobackground;min-width: 50px"><spring:message code="label.invoice.invoiceno"></spring:message></label>
-                                            <input type="text" class="edit-input invoicelabel" name="invoicelabel" id="invoicelabel" value="" style="max-width: 150px"/>
+                                            <input type="text" class="edit-input invoicelabel" name="invoicelabel" id="invoicelabel" value="${invoice.invoicelabel}" style="max-width: 150px"/>
                                             <label for="name" class="control-label invidlabel" style="background: infobackground;min-width: 50px;text-align: center">
-                                                AUTO
+                                                ${invoice.invoiceno}
                                             </label>
                                             <input type="text" class="edit-input" name="invoiceno" id="invoiceid" value="0" style="max-width: 150px"/>
                                         </h3>

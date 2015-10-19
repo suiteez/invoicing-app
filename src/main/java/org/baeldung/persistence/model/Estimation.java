@@ -1,48 +1,62 @@
-package org.baeldung.persistence.service;
+package org.baeldung.persistence.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 
-import javax.validation.constraints.NotNull;
-import org.baeldung.persistence.model.Estimationdetail;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.NumberFormat;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-public class EstimationDto {
+@Entity
+@Table(name = "ESTIMATION")
+public class Estimation {
 
-    private Integer id;
-    @NotNull
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String estimateno;
-    @NotNull
     private String estimatelabel;
-    @NotNull
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @Temporal(TemporalType.DATE)
     private Date invoicedate;
-    @NotNull
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @Temporal(TemporalType.DATE)
     private Date duedate;
-    @NotNull
-    private String customer;
-    @NotNull
-    @NumberFormat(style = NumberFormat.Style.CURRENCY)
+//    private int customerid;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customerid")
+    private Customer customer;
     private BigDecimal subtotal;
-    @NotNull
-    @NumberFormat(style = NumberFormat.Style.CURRENCY)
     private BigDecimal tax;
-    @NotNull
-    @NumberFormat(style = NumberFormat.Style.CURRENCY)
     private BigDecimal total;
-    @NotEmpty
+//    @OneToMany(mappedBy="invoice")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "invoice_id")
     private List<Estimationdetail> invdetailList = new ArrayList<>();
 
-    public Integer getId() {
+    public Estimation() {
+    }
+
+    public Estimation(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -78,11 +92,19 @@ public class EstimationDto {
         this.duedate = duedate;
     }
 
-    public String getCustomer() {
+    public BigDecimal getTax() {
+        return tax;
+    }
+
+    public void setTax(BigDecimal tax) {
+        this.tax = tax;
+    }
+
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(String customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
@@ -94,14 +116,6 @@ public class EstimationDto {
         this.subtotal = subtotal;
     }
 
-    public BigDecimal getTax() {
-        return tax;
-    }
-
-    public void setTax(BigDecimal tax) {
-        this.tax = tax;
-    }
-
     public BigDecimal getTotal() {
         return total;
     }
@@ -110,6 +124,11 @@ public class EstimationDto {
         this.total = total;
     }
 
+//    @JoinTable(
+//            name="Invoicedetail",
+//            joinColumns = @JoinColumn( name="PRODUCT_ID"),
+//            inverseJoinColumns = @JoinColumn( name="PART_ID")
+//    )
     public List<Estimationdetail> getInvdetailList() {
         return invdetailList;
     }
@@ -118,18 +137,11 @@ public class EstimationDto {
         this.invdetailList = invdetailList;
     }
 
-//	@Override
-//	public String toString() {
-//		return "InvoiceDto [id=" + id + ", product=" + product
-//				+ ", description=" + description + ", quantity=" + quantity
-//				+ ", price=" + price + ", tax=" + tax + ", amount=" + amount
-//				+ "]";
-//	}
     @Override
     public String toString() {
-        return "EstimationDto{" + "id=" + id + ", invoicedate=" + invoicedate + ", "
+        return "Invoice{" + "id=" + id + ", invoicedate=" + invoicedate + ", "
                 + "duedate=" + duedate + ", customer=" + customer + ", "
-                + "subtotal=" + subtotal + ", tax=" + tax + ", total=" + total + ", "
-                + "invdetailList=" + invdetailList + '}';
+                + "subtotal=" + subtotal + ", tax=" + tax + ", total=" + total
+                + " invoicedetail=" + invdetailList + '}';
     }
 }
