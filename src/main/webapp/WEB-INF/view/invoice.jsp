@@ -272,7 +272,7 @@
                                     <div class="clearfix"></div>
                                 </div> <!--form internal div-->
                                 <div class="container-fluid text-center form-inline"><br>
-                                    <p><button class="btn btn-danger" type="reset">Reset</button>
+                                    <p><button class="btn btn-danger" id="reset" type="reset">Reset</button>
                                     <button class="btn btn-primary" type="submit" id="savedraft">
                                         <spring:message code="label.invoice.form.draft"></spring:message>
                                     </button>
@@ -536,6 +536,10 @@
                         initAutocomp($('#product_Name'+counter));
                         initListners(counter);
                     });
+                    $('#reset').click();
+                    $('#addInvoiceForm').trigger("reset");
+                    $("#product_Name0").val("");
+                    $("#customer").val("");
                 });
 
 
@@ -599,6 +603,10 @@
                                 $('#productmodal').modal('hide')
                                 console.log("product added.");
                                 $(productselectid).combobox('autocomplete', data.customobj.productName);
+                                $(".description"+$("#productrowid").val()).val(data.customobj.description);
+                                $(".price"+$("#productrowid").val()).val(data.customobj.price);
+                                $(".quantity"+$("#productrowid").val()).val("1");
+                                $(".description"+$("#productrowid").val()).focus();
 //                                $(productselectid).trigger("autocompleteselect");
 //                                $(productselectid).data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item:{value:data.customobj.productName}});
                             }else{
