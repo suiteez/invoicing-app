@@ -23,6 +23,7 @@ public class Customer {
     private String zip;
     private String country;
     private String state;
+    private String email;
 
     public int getId() {
         return id;
@@ -96,9 +97,17 @@ public class Customer {
         this.state = state;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
-        return "Customer [id=" + id + ", firstName=" + firstName
-                + ", lastName=" + lastName + "]";
+        return "Customer{" + "id=" + id + ", name=" + name + ", firstName=" + firstName + ", lastName=" + lastName + ", streetAddress=" + streetAddress + ", city=" + city + ", zip=" + zip + ", country=" + country + ", state=" + state + ", email=" + email + '}';
     }
+
 }
