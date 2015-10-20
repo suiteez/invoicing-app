@@ -139,7 +139,7 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#invoices"><spring:message code="label.invoicelist.pageheader"></spring:message></a></li>
                                 <li><a href="<c:url value="/invoices#estimation" />"><spring:message code="label.pages.estimation"></spring:message></a></li>
-                                <li><a href="<c:url value="/recurring" />"><spring:message code="label.invoicerecurrlist.pageheader"></spring:message></a></li>
+                                <!--<li><a href="<c:url value="/recurring" />"><spring:message code="label.invoicerecurrlist.pageheader"></spring:message></a></li>-->
                             </ul>
 
                             <!--<h1 class="page-header"><spring:message code="label.invoicelist.pageheader"></spring:message></h1>-->
