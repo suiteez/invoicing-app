@@ -110,6 +110,7 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#invoice"><spring:message code="label.invoicelist.pageheader"></spring:message></a></li>
                                 <li><a data-toggle="tab" href="#estimation"><spring:message code="label.pages.estimation"></spring:message></a></li>
+                                <!--<li><a href="<c:url value="/recurring" />"><spring:message code="label.invoicerecurrlist.pageheader"></spring:message></a></li>-->
                             </ul>
 
                             <!--<h1 class="page-header"><spring:message code="label.invoicelist.pageheader"></spring:message></h1>-->
@@ -130,11 +131,11 @@
                                     <c:when test="${!empty invoiceList}">
                                         <table id="invoicetable" class="table table-striped display" >
                                             <thead class="tab-header"><tr>
-                                                <th width="120">Invoice Date</th>
-                                                <th width="80">Invoice No</th>
-                                                <th width="120">Customer</th>
-                                                <th width="60">Amount</th>
-                                                <th width="60">Status</th>
+                                                <th width="">Invoice Date</th>
+                                                <th width="">Invoice No</th>
+                                                <th width="">Customer</th>
+                                                <th width="">Amount</th>
+                                                <th width="">Status</th>
                                             </tr></thead>
                                             <tbody>
                                             <jsp:useBean id="today" class="java.util.Date" scope="page" />
