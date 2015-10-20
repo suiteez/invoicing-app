@@ -1,0 +1,46 @@
+/* 
+    Document   : invoices
+    Created on : 3 Oct, 2015, 6:13:41 PM
+    Author     : Aamir Mansuri
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@charset "utf-8";
+
+
+root { 
+    display: block;
+}
+
+/*drop down max width of auto complete*/
+.ui-autocomplete-input{
+    max-width: 180px;
+}
+
+html,
+body {
+	margin:0;
+	padding:0;
+	height:100%;
+}
+#wrapper {
+	min-height:100%;
+	position:relative;
+}
+#header {
+	background:#ededed;
+	padding:10px;
+}
+#page-wrapper {
+	padding-bottom:100px; /* Height of the footer element */
+}
+footer {
+	/*background:#ffab62;*/
+	width:100%;
+	height:20px;
+	position:absolute;
+	bottom:0;
+	left:0;
+        padding-left: 20px;
+}

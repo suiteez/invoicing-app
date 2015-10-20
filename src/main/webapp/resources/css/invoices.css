@@ -196,3 +196,8 @@ table.dataTable.no-footer{
     border: 1px solid #CCC;
     border-radius: 5px;
 }
+
+/*drop down max width of auto complete*/
+.ui-autocomplete-input{
+    max-width: 180px;
+}

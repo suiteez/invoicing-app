@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.Query;
  * @author sachinbabujettipraksh
  *
  */
-public interface IInvoiceRespository extends JpaRepository<Invoice, Long> {
+public interface IInvoiceRespository extends JpaRepository<Invoice, Integer> {
 
     @Override
     void delete(Invoice invoice);

@@ -34,6 +34,7 @@ public class CustomerService implements ICustomerService {
         customer.setFirstName(customerDto.getFirstName());
         customer.setLastName(customerDto.getLastName());
         customer.setName(customerDto.getName());
+        customer.setEmail(customerDto.getEmail());
         customer.setState(customerDto.getState());
         customer.setCountry(customerDto.getCountry());
         customer.setCity(customerDto.getCity());

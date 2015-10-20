@@ -13,6 +13,7 @@
         <!-- Bootstrap Core CSS -->
         <link href="<c:url value="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />" rel="stylesheet"/>
 
+        <link href="<c:url value="/resources/css/common.css" />" rel="stylesheet"/>
         <link href="<c:url value="/resources/css/invoices.css" />" rel="stylesheet"/>
 
         <!-- MetisMenu CSS -->
@@ -138,6 +139,7 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#invoices"><spring:message code="label.invoicelist.pageheader"></spring:message></a></li>
                                 <li><a href="<c:url value="/invoices#estimation" />"><spring:message code="label.pages.estimation"></spring:message></a></li>
+                                <li><a href="<c:url value="/recurring" />"><spring:message code="label.invoicerecurrlist.pageheader"></spring:message></a></li>
                             </ul>
 
                             <!--<h1 class="page-header"><spring:message code="label.invoicelist.pageheader"></spring:message></h1>-->
@@ -148,7 +150,7 @@
                                     
                         <!--<h1 class="page-header"><spring:message code="label.invoice.pageheader"></spring:message></h1>-->
                         <c:if test="${param.message != null}">
-                            <div class="alert alert-info">
+                            <div class="alert alert-info messages">
                                 ${param.message}
                             </div>
                         </c:if>
@@ -174,22 +176,22 @@
                                     </fieldset>
                                     <hr />
 
-                                    <div class="container text-center form-inline">
-                                        <div class="col-sm-3">
+                                    <div class="container-fluid text-center form-inline">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label><spring:message code="label.invoice.invoicedate"></spring:message></label>
                                                 <input class="form-control datepicker" type="text" id="invoicedate" name="invoicedate" placeholder="MM/dd/yyyy" value="" required/>
                                                 <span id="invoicedateError" class="alert alert-danger col-sm-2" style="display:none"></span>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label><spring:message code="label.invoice.duedate"></spring:message></label>
                                                 <input class="form-control datepicker" type="text" id="duedate" name="duedate" value="" placeholder="MM/dd/yyyy"  required/>
                                                 <span id="duedateError" class="alert alert-danger col-sm-2" style="display:none"></span>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label><spring:message code="label.invoice.customer"></spring:message></label>
                                                 <select id="customer"  name="customer" class="form-control combobox autocomplete" placeholder="start typing a Customer Name" >
@@ -237,11 +239,11 @@
                                         </div>
 
                                     </div>
-                                    <div class="container form-inline">
+                                    <div class="container-fluid form-inline">
                                         <p><a href="#" title="add-new-invoice" class="add-new-invoice">
                                                 <span class="glyphicon glyphicon-plus"></span><spring:message code="label.invoice.addnewproduct"></spring:message></a> <br></p>
                                     </div>
-                                    <div class="container text-center form-inline">
+                                    <div class="container-fluid text-center form-inline">
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label><spring:message code="label.invoice.totalprice"></spring:message></label>
@@ -250,7 +252,7 @@
                                                 <span id="subtotalError" class="alert alert-danger col-sm-2" style="display:none"></span>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label><spring:message code="label.invoice.totaltax"></spring:message></label>
                                                 <input type="hidden" id="totaltax" name="tax" value="" />
@@ -258,7 +260,7 @@
                                                 <span id="taxError" class="alert alert-danger col-sm-2" style="display:none"></span>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label><spring:message code="label.invoice.totalamount"></spring:message></label>
                                                 <input type="hidden" id="totalamount" name="total" value="" />
@@ -269,7 +271,7 @@
                                     </div><br>
                                     <div class="clearfix"></div>
                                 </div> <!--form internal div-->
-                                <div class="container text-center form-inline"><br>
+                                <div class="container-fluid text-center form-inline"><br>
                                     <p><button class="btn btn-danger" type="reset">Reset</button>
                                     <button class="btn btn-primary" type="submit" id="savedraft">
                                         <spring:message code="label.invoice.form.draft"></spring:message>
@@ -404,8 +406,8 @@
 
                     <!-- /.container -->
 
-                    <hr>
                     <footer>
+                        <hr>
                         <p>&copy; MattSac.com 2015</p>
                     </footer>
                 </div>
@@ -453,29 +455,34 @@
                     $.get(getContextPath()+"/invoices/getid",
                         function(data){
                             if(data.message == "success"){
-                                if(!(data.customobj.invoiceno)){
+                                if(!(data.customobj.id)){
                                     $("#invoiceid").val("1");
                                     $('.invidlabel').text($("#invoiceid").val());
                                 }else{
-                                    var invoiceid = data.customobj.invoiceno;
-                                    var nums= invoiceid.match(/\d$/);
-                                    if(nums){
-                                        invoiceid = invoiceid.replace(/(\d+)$/, function (match, n) {
-                                            return ++n; // parse to int and increment number
-                                        });
+                                    var invoiceid = data.customobj.id;
+                                    if(jQuery.isNumeric(invoiceid)){
+                                        invoiceid= invoiceid+1;
                                     }else{
-                                        invoiceid=invoiceid+"1";
+                                        var nums= invoiceid.match(/\d$/);
+                                        if(nums){
+                                            invoiceid = invoiceid.replace(/(\d+)$/, function (match, n) {
+                                                return ++n; // parse to int and increment number
+                                            });
+                                        }else{
+                                            invoiceid=invoiceid+"1";
+                                        }
                                     }
                                     $("#invoiceid").val(invoiceid);
                                     $('.invidlabel').text($("#invoiceid").val());
                                 }
 
                 //                $('.invlabel').text("Invoice #");
-                //                $('.invoicelabel').text("Invoice #");
-                                console.log("invoice id."+data.customobj.invoiceid);
+                                $('.invoicelabel').val($('.invlabel').text());
+                                console.log("invoice id."+data.customobj.invoiceno);
                             }else{
                                 $("#invoiceid").val("1");
                                 $('.invidlabel').text($("#invoiceid").val());
+                                $('.invoicelabel').val($('.invlabel').text());
                                 console.log("invoice id not found."+data);
                             }
                     }).fail(function(data) {
@@ -544,6 +551,7 @@
                         }
                     })
                     .fail(function(data) {
+                        clearErrorsMessages();
                         $("#status").val("0");
                         $("#globalError").show().append(data.responseJSON.error+"<br>");
                         $.each( data.responseJSON.message, function( index,item ){
@@ -619,6 +627,12 @@
                         index++;
                     
                     });
+                }
+                
+                function clearErrorsMessages(){
+                    $("#globalError").html("");
+                    $(".messages").hide();
+                    $(".messages").html("");
                 }
                 function getContextPath() {
                     return "<c:out value="${pageContext.request.contextPath}" />";

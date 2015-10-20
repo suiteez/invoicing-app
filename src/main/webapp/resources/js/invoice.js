@@ -22,6 +22,20 @@ $(document).ready(function () {
     
     //init auto complete for customer...
     initAutocomp($("#customer"));
+    
+    
+    // Overrides the default autocomplete filter function to search only from the beginning of the string
+    $.ui.autocomplete.filter = function (array, term) {
+        var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+        return $.grep(array, function (value) {
+            if(value.product){
+                return true;
+            }else{
+                return matcher.test(value.label || value.value || value);
+            }
+        });
+    };
+    
     //add events for text fields...
     initListners(0);
     
@@ -63,6 +77,8 @@ $(document).ready(function () {
         }
         dad.find('label.invlabel').show();
     });
+    
+    $('.ui-autocomplete-input').css('max-width','180px');
 
 });
 
@@ -122,6 +138,7 @@ function calctotal(){
 function initAutocomp(element){
     $(function() {
         instance = element.combobox();
+        instance.find("ul.ui-autocomplete").append("<hr><a href=#>Add</a>");
     });
 }
 
@@ -147,21 +164,21 @@ function autocompserach(oEvent, oUi) {
         }
     });
                 
-    if(aSearch.length==0 && sValue!=""){
-        if(oEvent.target.id=='customer'){
-            aSearch.push({
-                label:"Add \""+sValue+"\" as a Customer",
-                value:sValue,
-                product:-1
-            });
-        }else{
-            aSearch.push({
-                label:"Add \""+sValue+"\" as a Product",
-                value:sValue,
-                product:-1
-            });
-        }
-    }else if(sValue==""){
+//    if(aSearch.length==0 && sValue!=""){
+//        if(oEvent.target.id=='customer'){
+//            aSearch.push({
+//                label:"Add \""+sValue+"\" as a Customer",
+//                value:sValue,
+//                product:-1
+//            });
+//        }else{
+//            aSearch.push({
+//                label:"Add \""+sValue+"\" as a Product",
+//                value:sValue,
+//                product:-1
+//            });
+//        }
+//    }else {
         //    }else if(sValue=="" && aSearch.length==0){
         if(oEvent.target.id=='customer'){
             aSearch.push({
@@ -176,7 +193,7 @@ function autocompserach(oEvent, oUi) {
                 product:-1
             });
         }
-    }
+//    }
     // change search array
     $(this).autocomplete('option', 'source', aSearch);
 }
@@ -185,9 +202,25 @@ function autocompserach(oEvent, oUi) {
 function patchAutocomplete() {
 
     $.ui.autocomplete.prototype._renderItem = function( ul, item) {
+        if(!item.product || item.product!="-1"){
         return $( "<li values="+item.value+" ></li>" )
         .text(item.label)
         .appendTo( ul );
+        }else if(item.label=='Add New Product'){
+            return $( "<li values='"+item.value+"' style='border-top:1px solid;'><span class='glyphicon glyphicon-plus'></span>"+item.label+"</li>" )
+//            .text(item.label)
+            .appendTo( ul );
+            
+        }else if(item.label=='Add New Customer'){
+            return $( "<li values='"+item.value+"' style='border-top:1px solid;'><span class='glyphicon glyphicon-plus'></span>"+item.label+"</li>" )
+            .appendTo( ul );
+
+        }else{
+            return $( "<li values="+item.value+" ></li>" )
+            .text(item.label)
+            .appendTo( ul );
+
+        }
     };
           
 }
@@ -197,7 +230,9 @@ function patchAutocomplete() {
 function clickAdd(ev,product){
     console.log("add clicked..."+product);
     if(ev.target.id=='customer'){
-        $("#name").val(product);
+        if(product!='Add New Customer'){
+            $("#name").val(product);
+        }
         $( "#customermodal" ).modal( "show" );
         $("#name").focus();
     //        $.post(getContextPath()+"/customer/addajax",
@@ -218,7 +253,9 @@ function clickAdd(ev,product){
         
     }else{
         $("#productrowid").val($("#"+ev.target.id).closest("div[data-id]").attr("data-id"));
-        $("#productName").val(product);
+        if(product!='Add New Product'){
+            $("#productName").val(product);
+        }
         $( "#productmodal" ).modal( "show" );
         $("#productName").focus();
     /*
